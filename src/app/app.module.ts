@@ -17,9 +17,9 @@ import { FormPageComponent } from './pages/form-page/form-page.component';
 import { ConfidentialitePageComponent } from './pages/confidentialite-page/confidentialite-page.component';
 import { CompanyService } from './services/company.service';
 import { AddressService } from './services/address.service';
+import { PdfGeneratorService } from './services/generator.service';
 import { SearchAddressFieldComponent } from './form-elements/search-address-field/search-address-field.component';
 import { SearchEmployerFieldComponent } from './form-elements/search-employer-field/search-employer-field.component';
-import { PdfGeneratorService } from './pdf/generator.service';
 
 @NgModule({
   declarations: [

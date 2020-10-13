@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PdfGeneratorService } from 'src/app/pdf/generator.service';
+import { PdfGeneratorService } from 'src/app/services/generator.service';
 
 @Component({
   selector: 'app-form-page',
