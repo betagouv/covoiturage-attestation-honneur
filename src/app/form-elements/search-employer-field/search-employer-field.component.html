@@ -1,0 +1,18 @@
+<mat-form-field>
+  <mat-label>Nom de l'employeur</mat-label>
+  <input matInput [formControl]="formCtl" [matAutocomplete]="auto" required />
+  <span matSuffix>
+    <mat-icon *ngIf="loading" class="spinner">cached</mat-icon>
+  </span>
+  <mat-error *ngIf="formCtl.hasError('required')">
+    Le nom de l'employeur est requis
+  </mat-error>
+  <mat-error *ngIf="formCtl.hasError('maxlength')">
+    Le nom de l'employeur ne peut dépasser 256 caractères
+  </mat-error>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of options | async" [value]="option">
+      {{ option }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

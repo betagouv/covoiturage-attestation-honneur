@@ -1,0 +1,18 @@
+<mat-form-field>
+  <mat-label>Adresse</mat-label>
+  <input matInput [formControl]="formCtl" [matAutocomplete]="auto" required />
+  <span matSuffix>
+    <mat-icon *ngIf="loading" class="spinner">cached</mat-icon>
+  </span>
+  <mat-error *ngIf="formCtl.hasError('required')">
+    L'adresse est requise
+  </mat-error>
+  <mat-error *ngIf="formCtl.hasError('maxlength')">
+    L'adresse ne peut dépasser 256 caractères
+  </mat-error>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of options | async" [value]="option">
+      {{ option }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
