@@ -28,11 +28,21 @@
   </div>
 
   <!-- Address -->
-  <div>
+  <!-- <div>
     <app-search-address-field
       [val]="address"
       (found)="onFound('address', $event)"
     ></app-search-address-field>
+  </div> -->
+  <div>
+    <label>Adresse</label>
+    <app-autocomplete formControlName="address"></app-autocomplete>
+    <p
+      style="color: #d00"
+      *ngIf="profileForm.get('address').hasError('required')"
+    >
+      Pets are required
+    </p>
   </div>
 
   <!-- Employer -->
@@ -83,7 +93,7 @@
     </mat-form-field>
   </div>
 
-  <!-- Employer -->
+  <!-- Location -->
   <div>
     <mat-form-field>
       <mat-label>Fait à</mat-label>

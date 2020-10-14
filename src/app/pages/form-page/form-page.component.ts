@@ -8,8 +8,22 @@ import { PdfGeneratorService } from 'src/app/services/generator.service';
   styleUrls: ['./form-page.component.scss'],
 })
 export class FormPageComponent implements OnInit {
+  possiblePets: { id: number; text: string }[] = [
+    { id: 1, text: 'hello' },
+    { id: 2, text: 'world' },
+    { id: 3, text: 'motto' },
+    { id: 4, text: 'yolo' },
+  ];
+
   // configure the form fields
   profileForm = new FormGroup({
+    pets: new FormControl(
+      [
+        { id: 1, text: 'hello' },
+        { id: 2, text: 'zozo' },
+      ],
+      [Validators.required]
+    ),
     firstName: new FormControl('Jon', [
       Validators.required,
       Validators.maxLength(128),
@@ -61,6 +75,7 @@ export class FormPageComponent implements OnInit {
   }
 
   async onSubmit() {
+    console.log(this.profileForm.value);
     this.pdf.generate(this.profileForm.value);
   }
 }

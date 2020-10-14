@@ -20,6 +20,7 @@ import { AddressService } from './services/address.service';
 import { PdfGeneratorService } from './services/generator.service';
 import { SearchAddressFieldComponent } from './form-elements/search-address-field/search-address-field.component';
 import { SearchEmployerFieldComponent } from './form-elements/search-employer-field/search-employer-field.component';
+import { AutocompleteFormComponent } from './form-elements/autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SearchEmployerFieldComponent } from './form-elements/search-employer-fi
     ConfidentialitePageComponent,
     SearchAddressFieldComponent,
     SearchEmployerFieldComponent,
+    AutocompleteFormComponent,
   ],
   imports: [
     AppRoutingModule,
