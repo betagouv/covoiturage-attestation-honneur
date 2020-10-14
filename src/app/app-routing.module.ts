@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ConfidentialitePageComponent } from './pages/confidentialite-page/confidentialite-page.component';
-import { FormPageComponent } from './pages/form-page/form-page.component';
+import { FormComponent } from './partials/form/form.component';
 
-const routes: Routes = [
-  { path: '', component: FormPageComponent },
-  { path: 'confidentialite', component: ConfidentialitePageComponent },
-];
+const routes: Routes = [{ path: '', component: FormComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -4,7 +4,7 @@ import { from, ObservableInput } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ProfileFormInterface } from '../interfaces/ProfileForm.interface';
+import { ProfileFormInterface } from '../shared/interfaces/ProfileForm.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class PdfGeneratorService {
 
   generate(data: ProfileFormInterface) {
     this.http
-      .get('/assets/certificate.pdf', { responseType: 'arraybuffer' })
+      .get('/assets/certificate_ltd.pdf', { responseType: 'arraybuffer' })
       .pipe(
         catchError(this.handleError),
 

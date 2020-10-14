@@ -3,27 +3,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PdfGeneratorService } from 'src/app/services/generator.service';
 
 @Component({
-  selector: 'app-form-page',
-  templateUrl: './form-page.component.html',
-  styleUrls: ['./form-page.component.scss'],
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss'],
 })
-export class FormPageComponent implements OnInit {
-  possiblePets: { id: number; text: string }[] = [
-    { id: 1, text: 'hello' },
-    { id: 2, text: 'world' },
-    { id: 3, text: 'motto' },
-    { id: 4, text: 'yolo' },
-  ];
-
+export class FormComponent implements OnInit {
   // configure the form fields
   profileForm = new FormGroup({
-    pets: new FormControl(
-      [
-        { id: 1, text: 'hello' },
-        { id: 2, text: 'zozo' },
-      ],
-      [Validators.required]
-    ),
     firstName: new FormControl('Jon', [
       Validators.required,
       Validators.maxLength(128),
@@ -57,14 +43,6 @@ export class FormPageComponent implements OnInit {
       Validators.maxLength(128),
     ]),
   });
-
-  // shortcuts to pass the values to the child components
-  get address() {
-    return this.profileForm.get('address').value;
-  }
-  get employer() {
-    return this.profileForm.get('employer').value;
-  }
 
   constructor(private pdf: PdfGeneratorService) {}
 

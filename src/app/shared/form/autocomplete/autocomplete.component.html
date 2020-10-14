@@ -1,5 +1,5 @@
 <div #autocomplete class="autocomplete">
-  <input [formControl]="search" autocomplete="off" />
+  <input class="rf-input" [formControl]="search" autocomplete="off" />
   <div class="dropdown-list" [hidden]="!open">
     <ul>
       <li *ngFor="let item of items" (click)="onItemClick(item)">
