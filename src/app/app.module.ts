@@ -12,9 +12,10 @@ import { CompanyService } from './services/company.service';
 import { AddressService } from './services/address.service';
 import { PdfGeneratorService } from './services/generator.service';
 import { AutocompleteFormComponent } from './shared/form/autocomplete/autocomplete.component';
+import { DarkModeToggleComponent } from './shared/ui/dark-mode-toggle/dark-mode-toggle.component';
 
 @NgModule({
-  declarations: [AppComponent, FormComponent, AutocompleteFormComponent],
+  declarations: [AppComponent, FormComponent, AutocompleteFormComponent, DarkModeToggleComponent],
   imports: [
     CommonModule,
     AppRoutingModule,

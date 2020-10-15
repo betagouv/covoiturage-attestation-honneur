@@ -25,6 +25,15 @@
           <p class="rf-service__tagline">Registre de preuve de covoiturage</p>
         </div>
       </div>
+      <div class="rf-header__tools">
+        <div class="rf-shortcuts">
+          <ul class="rf-shortcuts__list">
+            <li class="rf-shortcuts__item">
+              <app-dark-mode-toggle></app-dark-mode-toggle>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -39,7 +48,14 @@
             Le Forfait Mobilités Durables vous donne droit à 400€ de prime
             versée par votre employeur.
           </p>
-          <h3>Comment ça marche&nbsp;?</h3>
+
+          <div class="rf-grid-row">
+            <ul>
+              <li><a href="">je suis salarié·e du secteur privé</a></li>
+              <li><a href="">je suis salarié·e du secteur public</a></li>
+              <li><a href="">je suis employeur</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -49,12 +65,12 @@
 <section class="rf-section">
   <div class="rf-container">
     <div class="rf-grid-row">
-      <div class="rf-col-6">
+      <div class="rf-col-sm-6 rf-col-xs-12">
         <div class="padding-1em">
           <router-outlet></router-outlet>
         </div>
       </div>
-      <div class="rf-col-6">
+      <div class="rf-col-6 rf-xs-hidden">
         <div class="padding-1em">
           <h2>Informations</h2>
           <p>
@@ -75,6 +91,22 @@
       <div class="padding-1em">
         <h2>Confidentialités de vos données</h2>
         <p>Pas de cookies, pas de traceurs, que du bon.</p>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere quo
+          illum cumque excepturi vero aliquam consequatur commodi similique
+          laboriosam maiores soluta nemo, eos vitae harum reprehenderit quia
+          minus? A, quisquam?
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rf-section">
+  <div class="rf-container">
+    <div class="rf-col-12">
+      <div class="padding-1em">
+        <h2>Je suis employeur</h2>
         <p>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere quo
           illum cumque excepturi vero aliquam consequatur commodi similique
