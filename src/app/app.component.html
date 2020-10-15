@@ -4,7 +4,7 @@
       <div class="rf-header__brand">
         <a
           class="rf-logo"
-          href="#"
+          href="/"
           title="Ministère de la transition écologique et solidaire"
         >
           <span class="rf-logo__title"
@@ -18,11 +18,10 @@
           <a
             class="rf-service__title"
             href="#"
-            title="Générateur d'attestation de covoiturage sur l'honneur"
+            title="Attestation sur l'honneur de covoiturage"
           >
-            Générateur d'attestation de covoiturage sur l'honneur
+            Attestation sur l'honneur de covoiturage
           </a>
-          <p class="rf-service__tagline">Registre de preuve de covoiturage</p>
         </div>
       </div>
       <div class="rf-header__tools">
@@ -43,19 +42,44 @@
     <div class="rf-grid-row">
       <div class="rf-col-12">
         <div class="padding-1em">
-          <h1>Générateur d'attestation de covoiturage</h1>
+          <h1>Générateur d'attestation sur l'honneur de covoiturage</h1>
           <p>
-            Le Forfait Mobilités Durables vous donne droit à 400€ de prime
-            versée par votre employeur.
+            Le Forfait Mobilités Durables (Article 82, loi d'orientation des
+            mobilités) permet aux employeurs la prise en charge facultative des
+            frais engagés par ses salariés pour se rendre sur leur lieu de
+            travail, notamment en covoiturage.
           </p>
 
-          <div class="rf-grid-row">
-            <ul>
-              <li><a href="">je suis salarié·e du secteur privé</a></li>
-              <li><a href="">je suis salarié·e du secteur public</a></li>
-              <li><a href="">je suis employeur</a></li>
-            </ul>
-          </div>
+          <p>
+            Le Forfait Mobilité Durable s'applique sur des frais de covoiturage
+            engagés par les salariés. Cette prise en charge par l'employeur est
+            entièrement exonérée d'impôt et de cotisations sociales et elle est
+            cumulable avec le remboursement des frais de transport en commun.
+          </p>
+          <p>
+            L’employeur doit pouvoir se procurer, auprès de ses salariés et
+            selon une périodicité au moins annuelle, une attestation sur
+            l'honneur du salarié ou un justificatif de l’utilisation des modes
+            de transport ouvrant droit à la prise en charge dans le cadre du «
+            forfait mobilités durables ». Ces modalités sont définies par des
+            accords entreprise.
+          </p>
+
+          <h3>Fonctionnement</h3>
+
+          <p>
+            Si les accords entreprise de l'employeur le permettent, il est
+            possible de communiquer une attestation sur l'honneur.
+          </p>
+
+          <ol>
+            <li>
+              je complète le formulaire suivant avec les informations me
+              concernant&nbsp;;
+            </li>
+            <li>je télécharge l'attestation dûment complétée&nbsp;;</li>
+            <li>je communique cette attestation auprès de mon employeur.</li>
+          </ol>
         </div>
       </div>
     </div>
@@ -65,22 +89,17 @@
 <section class="rf-section">
   <div class="rf-container">
     <div class="rf-grid-row">
-      <div class="rf-col-sm-6 rf-col-xs-12">
+      <div class="rf-col-md-6 rf-col-offset-md-3 rf-col-xs-12">
         <div class="padding-1em">
           <router-outlet></router-outlet>
         </div>
       </div>
-      <div class="rf-col-6 rf-xs-hidden">
+      <!-- <div class="rf-col-6 rf-xs-hidden">
         <div class="padding-1em">
           <h2>Informations</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-            repellat non, libero molestias, voluptas amet nostrum at,
-            dignissimos iure eos magni. Distinctio magni accusamus sit rem,
-            totam rerum iure molestiae.
-          </p>
+          <p></p>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -89,47 +108,79 @@
   <div class="rf-container">
     <div class="rf-col-12">
       <div class="padding-1em">
-        <h2>Confidentialités de vos données</h2>
-        <p>Pas de cookies, pas de traceurs, que du bon.</p>
+        <h2>Confidentialité de vos données</h2>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere quo
-          illum cumque excepturi vero aliquam consequatur commodi similique
-          laboriosam maiores soluta nemo, eos vitae harum reprehenderit quia
-          minus? A, quisquam?
+          Ce site n'utilise pas de cookies.<br />
+          Il stocke vos préférences d'affichage (mode jour ou nuit) dans votre
+          navigateur (<em>localStorage</em>), accessibles uniquement par vous.
+        </p>
+        <p>
+          L'attestation est générée directement dans votre navigateur sans
+          passer par un serveur. Aucun document ou information personnelle n'est
+          stockée.
+        </p>
+        <p>
+          Le nombre d'attestations est comptabilisé de manière anonyme sur la
+          page de
+          <a
+            href="https://app.covoiturage.beta.gouv.fr/stats"
+            target="_blank"
+            rel="noopener noreferrer"
+            >statistiques</a
+          >
+          du
+          <a
+            href="http://covoiturage.beta.gouv.fr/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Registre de preuve de covoiturage</a
+          >.
+        </p>
+        <p>
+          Le site est hébergé en France chez
+          <a
+            href="https://www.alwaysdata.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Alwaysdata</a
+          >
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="rf-section">
+<footer class="rf-footer" role="contentinfo">
   <div class="rf-container">
-    <div class="rf-col-12">
-      <div class="padding-1em">
-        <h2>Je suis employeur</h2>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere quo
-          illum cumque excepturi vero aliquam consequatur commodi similique
-          laboriosam maiores soluta nemo, eos vitae harum reprehenderit quia
-          minus? A, quisquam?
+    <div class="rf-footer__body">
+      <div class="rf-footer__brand">
+        <a class="rf-logo" href="#" title="république<br>française">
+          <span class="rf-logo__title">république<br />française</span>
+        </a>
+      </div>
+      <div class="rf-footer__content">
+        <p class="rf-footer__content-desc">
+          Ce site a été développé par l'équipe du Registre de preuve de
+          covoiturage, une Startup d'État de <em>beta.gouv.fr</em>.
         </p>
+        <p class="rf-footer__content-desc">
+          Le code source est ouvert et les contributions sont bienvenues.<br />
+          Licence Apache-2.0
+        </p>
+        <ul class="rf-footer__content-links">
+          <li>
+            <a href="https://beta.gouv.fr">beta.gouv.fr</a>
+          </li>
+          <li>
+            <a href="https://ecologie.gouv.fr">
+              Ministère de la transition écologique et solidaire
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
-
-<footer class="rf-footer">
-  <div class="rf-container">
-    <div class="rf-grid-row">
-      <div class="rf-col-12 padding-1em">
-        <h4>beta.gouv</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore cum
-          eaque distinctio pariatur dolor? Dolor fugiat minima incidunt
-          reiciendis at in aliquid accusantium, voluptatem quod facilis
-          explicabo rem assumenda expedita?
-        </p>
-      </div>
+    <div class="rf-footer__bottom">
+      <div class="rf-footer__bottom-copy">© République Française 2020</div>
     </div>
   </div>
 </footer>

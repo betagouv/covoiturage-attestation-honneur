@@ -1,21 +1,16 @@
+<app-form-pickatype></app-form-pickatype>
+
 <form [formGroup]="profileForm" (submit)="onSubmit()">
+  <h4>Secteur privé</h4>
+
   <!-- firstName -->
   <div class="rf-input-group">
     <label class="rf-label">Prénom</label>
-    <p class="rf-hint-text" id="text-input-hint-desc-hint">
-      Texte de description additionnel
-    </p>
     <input class="rf-input" formControlName="firstName" required />
-    <p
-      *ngIf="profileForm.get('firstName').hasError('required')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('firstName', 'required')" class="rf-error-text">
       Le prénom est requis
     </p>
-    <p
-      *ngIf="profileForm.get('firstName').hasError('maxlength')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('firstName', 'maxlength')" class="rf-error-text">
       Le prénom ne peut dépasser 128 caractères
     </p>
   </div>
@@ -24,16 +19,10 @@
   <div class="rf-input-group">
     <label class="rf-label">Nom</label>
     <input class="rf-input" formControlName="lastName" required />
-    <p
-      *ngIf="profileForm.get('lastName').hasError('required')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('lastName', 'required')" class="rf-error-text">
       Le nom est requis
     </p>
-    <p
-      *ngIf="profileForm.get('lastName').hasError('maxlength')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('lastName', 'maxlength')" class="rf-error-text">
       Le nom ne peut dépasser 128 caractères
     </p>
   </div>
@@ -42,16 +31,10 @@
   <div class="rf-input-group">
     <label class="rf-label">Adresse du domicile</label>
     <app-autocomplete formControlName="address"></app-autocomplete>
-    <p
-      *ngIf="profileForm.get('address').hasError('required')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('address', 'required')" class="rf-error-text">
       L'adresse du domicile est requise
     </p>
-    <p
-      *ngIf="profileForm.get('address').hasError('maxlength')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('address', 'maxlength')" class="rf-error-text">
       L'adresse ne peut dépasser 256 caractères
     </p>
   </div>
@@ -59,95 +42,73 @@
   <!-- Employer -->
   <div class="rf-input-group">
     <label class="rf-label">Nom de l'employeur</label>
-    <app-autocomplete formControlName="employer"></app-autocomplete>
-    <p
-      *ngIf="profileForm.get('employer').hasError('required')"
-      class="rf-error-text"
-    >
+    <app-autocomplete-company
+      formControlName="employer"
+    ></app-autocomplete-company>
+    <p *ngIf="showError('employer', 'required')" class="rf-error-text">
       Le nom de l'employeur est requis
     </p>
-    <p
-      *ngIf="profileForm.get('employer').hasError('maxlength')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('employer', 'maxlength')" class="rf-error-text">
       Le nom de l'employeur ne peut dépasser 256 caractères
     </p>
   </div>
 
+  <h4>Covoiturage</h4>
+
   <!-- Distance -->
   <div class="rf-input-group">
-    <label>Nombre de kilomètres</label>
+    <label class="rf-label">Nombre de kilomètres</label>
     <input class="rf-input" formControlName="distance" required maxlength="6" />
-    <p
-      *ngIf="profileForm.get('distance').hasError('required')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('distance', 'required')" class="rf-error-text">
       La distance est requise
     </p>
-    <p
-      *ngIf="profileForm.get('distance').hasError('max')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('distance', 'max')" class="rf-error-text">
       La distance ne peut dépasser 100000&nbsp;km
     </p>
-    <p
-      *ngIf="profileForm.get('distance').hasError('min')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('distance', 'min')" class="rf-error-text">
       La distance ne peut inférieure à 1&nbsp;km
     </p>
-    <p
-      *ngIf="profileForm.get('distance').hasError('pattern')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('distance', 'pattern')" class="rf-error-text">
       Ce champ n'accepte que les chiffres
     </p>
   </div>
+
+  <h5 class="h-text-center">ET / OU</h5>
 
   <!-- Days -->
   <div class="rf-input-group">
     <label class="rf-label">Nombre de jours de covoiturage</label>
     <input class="rf-input" formControlName="days" required maxlength="3" />
-    <p
-      *ngIf="profileForm.get('days').hasError('required')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('days', 'required')" class="rf-error-text">
       Le nombre de jours est requis
     </p>
-    <p *ngIf="profileForm.get('days').hasError('max')" class="rf-error-text">
+    <p *ngIf="showError('days', 'max')" class="rf-error-text">
       Le nombre de jours ne peut dépasser 365
     </p>
-    <p *ngIf="profileForm.get('days').hasError('min')" class="rf-error-text">
+    <p *ngIf="showError('days', 'min')" class="rf-error-text">
       Le nombre de jours ne peut être inférieur à 1
     </p>
-    <p
-      *ngIf="profileForm.get('days').hasError('pattern')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('days', 'pattern')" class="rf-error-text">
       Ce champ n'accepte que les chiffres
     </p>
   </div>
+
+  <h4>Signature</h4>
 
   <!-- Location -->
   <div class="rf-input-group">
     <label class="rf-label">Fait à</label>
     <input class="rf-input" formControlName="location" required />
-    <p
-      *ngIf="profileForm.get('location').hasError('required')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('location', 'required')" class="rf-error-text">
       La commune de génération est requise
     </p>
-    <p
-      *ngIf="profileForm.get('location').hasError('maxlength')"
-      class="rf-error-text"
-    >
+    <p *ngIf="showError('location', 'maxlength')" class="rf-error-text">
       La commune de génération ne peut dépasser 128 caractères
     </p>
   </div>
 
   <!-- Actions -->
-  <div class="rf-input-group">
+  <div class="rf-input-group rf-input-group--actions">
     <button type="reset" class="rf-btn rf-btn--secondary">Annuler</button>
     &nbsp;
     <button type="submit" class="rf-btn" [disabled]="!profileForm.valid">

@@ -20,22 +20,23 @@ import {
   FormControl,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
-import { AddressService } from 'src/app/services/address.service';
+import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
-  selector: 'app-autocomplete',
-  templateUrl: './autocomplete.component.html',
-  styleUrls: ['./autocomplete.component.scss'],
+  selector: 'app-autocomplete-company',
+  templateUrl: './autocomplete-company.component.html',
+  styleUrls: ['./autocomplete-company.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AutocompleteFormComponent),
+      useExisting: forwardRef(() => AutocompleteCompanyFormComponent),
       multi: true,
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
+export class AutocompleteCompanyFormComponent
+  implements OnInit, ControlValueAccessor {
   @ViewChild('autocomplete', { static: true }) autocomplete: ElementRef<any>;
 
   items: Array<string> = [];
@@ -45,7 +46,7 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
   loading = false;
 
   constructor(
-    private service: AddressService,
+    private service: CompanyService,
     private ref: ChangeDetectorRef
   ) {}
 

@@ -1,1 +1,44 @@
 @import "./scss/dsfr";
+
+.padding-1em {
+  padding: 1em;
+}
+
+.rf-section {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.rf-section--secondary {
+  background-color: var(--g200);
+}
+
+.rf-input-group--actions {
+  text-align: right;
+}
+
+@media (max-width: 36em) {
+  .rf-xs-hidden {
+    display: none;
+  }
+}
+
+.rf-footer {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: var(--g300);
+  }
+
+  padding-top: 2em;
+  padding-bottom: 5em;
+  background-color: var(--g700);
+}
+
+.h-text-center {
+  text-align: center;
+}

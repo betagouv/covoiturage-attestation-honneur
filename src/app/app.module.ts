@@ -7,15 +7,28 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormComponent } from './partials/form/form.component';
+import { FormLimitedComponent } from './pages/form-limited/form-limited.component';
 import { CompanyService } from './services/company.service';
 import { AddressService } from './services/address.service';
 import { PdfGeneratorService } from './services/generator.service';
 import { AutocompleteFormComponent } from './shared/form/autocomplete/autocomplete.component';
+import { AutocompleteCompanyFormComponent } from './shared/form/autocomplete-company/autocomplete-company.component';
 import { DarkModeToggleComponent } from './shared/ui/dark-mode-toggle/dark-mode-toggle.component';
+import { FormPickatypeComponent } from './pages/form-pickatype/form-pickatype.component';
+import { FormPublicComponent } from './pages/form-public/form-public.component';
+import { FormEmployerComponent } from './pages/form-employer/form-employer.component';
 
 @NgModule({
-  declarations: [AppComponent, FormComponent, AutocompleteFormComponent, DarkModeToggleComponent],
+  declarations: [
+    AppComponent,
+    FormLimitedComponent,
+    AutocompleteFormComponent,
+    DarkModeToggleComponent,
+    FormPickatypeComponent,
+    FormPublicComponent,
+    FormEmployerComponent,
+    AutocompleteCompanyFormComponent,
+  ],
   imports: [
     CommonModule,
     AppRoutingModule,

@@ -17,10 +17,14 @@ export class DarkModeToggleComponent implements OnInit {
   ngOnInit(): void {
     // fetch the user value from localStorage
     // or fallback to browser preferences. Defaults to light
-    this.scheme = (localStorage.getItem('scheme') ||
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light') as Scheme;
+    const ls = localStorage.getItem('scheme');
+
+    this.scheme =
+      ['dark', 'light'].indexOf(ls) > -1
+        ? (ls as Scheme)
+        : window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
 
     this.apply(this.scheme);
     this.toggle.setValue(this.scheme === 'dark', { emitEvent: false });
