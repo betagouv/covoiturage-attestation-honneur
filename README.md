@@ -16,9 +16,9 @@ Si les accords entreprise de l'employeur le permettent, il est possible de commu
 
 ## Contribution
 
-Les contributions sont les bienvenues. Merci de [créer un ticket](/issues) si le sujet n'a pas déjà été abordé.
+Les contributions sont les bienvenues. Merci de [créer un ticket](/../../issues) si le sujet n'a pas déjà été abordé.
 
-Les [_Pull Requests_](/pulls) documentées sont également les bienvenues.
+Les [_Pull Requests_](/../../pulls) documentées sont également les bienvenues.
 
 ## Licence
 
