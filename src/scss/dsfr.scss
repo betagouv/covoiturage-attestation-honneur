@@ -3163,6 +3163,13 @@ ol {
     }
   }
 }
+.rf-label--required {
+  &::after {
+    content: "*";
+    margin-left: 0.1em;
+    color: var(--error);
+  }
+}
 .rf-label--error {
   color: var(--error);
 }

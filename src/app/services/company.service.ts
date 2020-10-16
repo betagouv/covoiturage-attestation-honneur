@@ -19,7 +19,12 @@ export class CompanyService {
     return this.http
       .get<{ suggestions: string[] }>(`${this.endpoint}${name}`)
       .pipe(
-        map((res) => res.suggestions),
+        map((res) =>
+          // Uppercase the first char of each suggestion
+          res.suggestions.map(
+            (s: string) => s.substring(0, 1).toUpperCase() + s.substring(1)
+          )
+        ),
         catchError((err) => {
           console.log(err);
           return of([]);

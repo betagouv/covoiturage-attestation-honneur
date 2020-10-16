@@ -56,13 +56,16 @@ export class AutocompleteCompanyFormComponent
         debounceTime(250),
         distinctUntilChanged(),
         filter((v) => v.trim().length > 1),
-        tap(() => (this.loading = true)),
-        switchMap((s: string) => this.service.search(s)),
-        tap(() => (this.loading = false))
+        tap(() => {
+          this.loading = true;
+          this.ref.markForCheck();
+        }),
+        switchMap((s: string) => this.service.search(s))
       )
       .subscribe((items) => {
         this.items = items;
         this.open = true;
+        this.loading = false;
         this.ref.markForCheck();
       });
   }

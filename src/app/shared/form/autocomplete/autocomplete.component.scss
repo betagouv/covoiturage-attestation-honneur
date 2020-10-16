@@ -1,55 +1,36 @@
-$color-border: #adadad;
-$color-selected: #d2d2d2;
-$color-selected-background: #fcfcfc;
-$color-disabled: rgba(0, 0, 0, 0.12);
-
-$spacing-extra-small: 4px;
-$spacing-small: 8px;
-$spacing-large: 12px;
-$border-radius: 3px;
-
 :host {
   width: 100%;
   display: flex;
 }
 
+@keyframes beat {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
 .autocomplete {
   width: 100%;
   position: relative;
-
-  //   .input {
-  //     border: 1px solid $color-border;
-  //     padding: $spacing-extra-small;
-  //     border-radius: $border-radius;
-  //     min-height: 30px;
-
-  //     :not(.disabled) {
-  //       cursor: pointer;
-  //     }
-
-  //     &.disabled {
-  //       background-color: $color-disabled;
-  //     }
-
-  //     .selected-item {
-  //       padding: 0 $spacing-extra-small;
-  //       border: 1px solid $color-border;
-  //       border-radius: $border-radius;
-  //       margin: $spacing-extra-small;
-  //       display: inline-block;
-  //     }
-  //   }
+  .rf-fi-search-line {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    animation: 0.5s ease infinite alternate beat;
+  }
 }
 
 .dropdown-list {
+  z-index: 9999;
   position: absolute;
   width: 100%;
-  margin-top: $spacing-small;
-  z-index: 9999;
-  border-color: white;
-  border-radius: $border-radius;
-  box-shadow: 0 1px 5px 0 #959595;
-  background-color: white;
+  margin-top: 0.5em;
+  border-color: var(--g800);
+  color: var(--g800);
+  background-color: var(--g200);
 
   ul {
     max-height: 250px;
@@ -60,17 +41,16 @@ $border-radius: 3px;
   }
 
   li {
-    padding: $spacing-small;
-    margin: $spacing-small;
+    padding: 0.5em;
+    margin: 0.5em;
     cursor: pointer;
-
-    &:hover {
-      background-color: #f4f4f4;
+    &::before {
+      content: none;
     }
-
+    &:hover,
     &.selected {
-      color: $color-selected;
-      background-color: $color-selected-background;
+      color: var(--w-bf500);
+      background-color: var(--bf500);
     }
   }
 }
