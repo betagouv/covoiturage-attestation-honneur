@@ -3,27 +3,15 @@
 <form [formGroup]="profileForm" (submit)="onSubmit()" (reset)="onReset()">
   <h4>Secteur privé</h4>
 
-  <!-- firstName -->
+  <!-- name -->
   <div class="rf-input-group">
-    <label class="rf-label rf-label--required">Prénom</label>
-    <input class="rf-input" formControlName="firstName" required />
-    <p *ngIf="showError('firstName', 'required')" class="rf-error-text">
+    <label class="rf-label rf-label--required">Je soussigné·e</label>
+    <input class="rf-input" formControlName="name" required />
+    <p *ngIf="showError('name', 'required')" class="rf-error-text">
       Le prénom est requis
     </p>
-    <p *ngIf="showError('firstName', 'maxlength')" class="rf-error-text">
+    <p *ngIf="showError('name', 'maxlength')" class="rf-error-text">
       Le prénom ne peut dépasser 128 caractères
-    </p>
-  </div>
-
-  <!-- lastName -->
-  <div class="rf-input-group">
-    <label class="rf-label rf-label--required">Nom</label>
-    <input class="rf-input" formControlName="lastName" required />
-    <p *ngIf="showError('lastName', 'required')" class="rf-error-text">
-      Le nom est requis
-    </p>
-    <p *ngIf="showError('lastName', 'maxlength')" class="rf-error-text">
-      Le nom ne peut dépasser 128 caractères
     </p>
   </div>
 

@@ -13,14 +13,7 @@ import { PdfLimitedGeneratorService } from '../../services/pdfLimited.service';
 export class FormLimitedComponent implements OnInit {
   // configure the form fields
   profileForm = new FormGroup({
-    firstName: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(128),
-    ]),
-    lastName: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(128),
-    ]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(128)]),
     address: new FormControl('', [
       Validators.required,
       Validators.maxLength(256),

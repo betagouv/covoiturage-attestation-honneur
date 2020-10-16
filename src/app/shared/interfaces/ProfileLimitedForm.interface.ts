@@ -1,6 +1,5 @@
 export interface ProfileLimitedFormInterface {
-  firstName: string;
-  lastName: string;
+  name: string;
   address: string;
   employer: string;
   distance: number;

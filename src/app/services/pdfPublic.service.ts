@@ -52,12 +52,12 @@ export class PdfPublicGeneratorService {
           );
 
           // set metadata
-          doc.setTitle('Attestation de covoiturage');
-          doc.setSubject('Attestation de covoiturage');
+          doc.setTitle("Attestation sur l'honneur de covoiturage");
+          doc.setSubject("Attestation sur l'honneur de covoiturage");
           doc.setKeywords(['attestation', 'covoiturage']);
           doc.setProducer('beta.gouv');
           doc.setCreator('');
-          doc.setAuthor('Ministère de la Transition écologique et solidaire');
+          doc.setAuthor('Ministère de la Transition écologique');
 
           return doc.save();
         })
