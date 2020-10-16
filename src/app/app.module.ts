@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { FormLimitedComponent } from './pages/form-limited/form-limited.component';
 import { CompanyService } from './services/company.service';
 import { AddressService } from './services/address.service';
-import { PdfGeneratorService } from './services/generator.service';
+import { PdfLimitedGeneratorService } from './services/pdfLimited.service';
 import { AutocompleteFormComponent } from './shared/form/autocomplete/autocomplete.component';
 import { AutocompleteCompanyFormComponent } from './shared/form/autocomplete-company/autocomplete-company.component';
 import { DarkModeToggleComponent } from './shared/ui/dark-mode-toggle/dark-mode-toggle.component';
@@ -37,7 +37,7 @@ import { FormEmployerComponent } from './pages/form-employer/form-employer.compo
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [CompanyService, AddressService, PdfGeneratorService],
+  providers: [CompanyService, AddressService, PdfLimitedGeneratorService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

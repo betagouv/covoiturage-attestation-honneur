@@ -4,15 +4,16 @@ import { from, ObservableInput } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ProfileFormInterface } from '../shared/interfaces/ProfileForm.interface';
+import { ProfileLimitedFormInterface } from '../shared/interfaces/ProfileLimitedForm.interface';
+import { certFilename } from '../shared/helpers/certFilename.helper';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PdfGeneratorService {
+export class PdfLimitedGeneratorService {
   constructor(private http: HttpClient) {}
 
-  generate(data: ProfileFormInterface) {
+  generate(data: ProfileLimitedFormInterface) {
     this.http
       .get('/assets/certificate_ltd.pdf', { responseType: 'arraybuffer' })
       .pipe(
@@ -65,7 +66,10 @@ export class PdfGeneratorService {
         })
       )
       .subscribe((pdfBytes) => {
-        saveAs(new Blob([pdfBytes]), 'attestation.pdf');
+        saveAs(
+          new Blob([pdfBytes]),
+          certFilename(`${data.firstName}-${data.lastName}`)
+        );
       });
   }
 

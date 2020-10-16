@@ -1,4 +1,4 @@
-export interface ProfileFormInterface {
+export interface ProfileLimitedFormInterface {
   firstName: string;
   lastName: string;
   address: string;

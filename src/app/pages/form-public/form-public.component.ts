@@ -9,7 +9,7 @@ import {
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { AddressService } from '../../services/address.service';
 import { CompanyService } from '../../services/company.service';
-import { PdfGeneratorService } from '../../services/generator.service';
+import { PdfPublicGeneratorService } from '../../services/pdfPublic.service';
 
 @Component({
   selector: 'app-form-public',
@@ -46,7 +46,7 @@ export class FormPublicComponent implements OnInit {
   constructor(
     protected addressService: AddressService,
     protected companyService: CompanyService,
-    private pdf: PdfGeneratorService
+    private pdf: PdfPublicGeneratorService
   ) {}
 
   ngOnInit(): void {
@@ -110,8 +110,7 @@ export class FormPublicComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.profileForm.value);
-    // this.pdf.generate(this.profileForm.value);
+    this.pdf.generate(this.profileForm.value);
   }
 
   trackByFn(index, item) {
