@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { CounterService } from 'src/app/services/counter.service';
 import { AddressService } from '../../services/address.service';
 import { CompanyService } from '../../services/company.service';
 import { PdfLimitedGeneratorService } from '../../services/pdfLimited.service';
@@ -39,7 +40,8 @@ export class FormLimitedComponent implements OnInit {
   constructor(
     protected addressService: AddressService,
     protected companyService: CompanyService,
-    private pdf: PdfLimitedGeneratorService
+    private pdf: PdfLimitedGeneratorService,
+    private counter: CounterService
   ) {}
 
   ngOnInit(): void {
@@ -82,5 +84,6 @@ export class FormLimitedComponent implements OnInit {
 
   async onSubmit() {
     this.pdf.generate(this.profileForm.value);
+    this.counter.save(window.origin, 'limited');
   }
 }

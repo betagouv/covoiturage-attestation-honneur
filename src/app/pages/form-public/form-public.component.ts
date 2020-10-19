@@ -7,6 +7,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { CounterService } from '../../services/counter.service';
 import { AddressService } from '../../services/address.service';
 import { CompanyService } from '../../services/company.service';
 import { PdfPublicGeneratorService } from '../../services/pdfPublic.service';
@@ -46,7 +47,8 @@ export class FormPublicComponent implements OnInit {
   constructor(
     protected addressService: AddressService,
     protected companyService: CompanyService,
-    private pdf: PdfPublicGeneratorService
+    private pdf: PdfPublicGeneratorService,
+    private counter: CounterService
   ) {}
 
   ngOnInit(): void {
@@ -111,6 +113,7 @@ export class FormPublicComponent implements OnInit {
 
   async onSubmit() {
     this.pdf.generate(this.profileForm.value);
+    this.counter.save(window.origin, 'public');
   }
 
   trackByFn(index, item) {
