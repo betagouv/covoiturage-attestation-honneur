@@ -23,11 +23,30 @@ export class FormPublicComponent implements OnInit {
   previousYear: number = new Date().getFullYear() - 1;
 
   profileForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.maxLength(256)]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(51)]),
+    ministry: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(120),
+    ]),
+    rank: new FormControl('', [Validators.required, Validators.maxLength(51)]),
     year: new FormControl(this.currentYear, [Validators.required]),
+    mobility: new FormControl('no', [Validators.required]),
+    mobility_date: new FormControl('', [Validators.required]),
+    work_days: new FormControl('', [
+      Validators.max(365),
+      Validators.pattern(/^[0-9]{0,6}$/),
+    ]),
     days: new FormControl('', [
       Validators.max(365),
       Validators.pattern(/^[0-9]{0,6}$/),
+    ]),
+    home_address: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(256),
+    ]),
+    work_address: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(256),
     ]),
     chk: new FormArray(
       [],
@@ -63,6 +82,20 @@ export class FormPublicComponent implements OnInit {
           // @ts-ignore
           document.getElementById(id).checked = true;
         });
+      } else {
+        document.querySelectorAll('[id*="checkbox_"]').forEach((box) => {
+          // @ts-ignore
+          box.checked = true;
+          (this.profileForm.get('chk') as FormArray).push(
+            new FormControl(box.getAttribute('id'))
+          );
+        });
+
+        // save to localStorage
+        localStorage.setItem(
+          'formPublic',
+          JSON.stringify(this.profileForm.value)
+        );
       }
     } catch (e) {
       localStorage.removeItem('formPublic');

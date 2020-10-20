@@ -29,11 +29,11 @@ export class PdfPublicGeneratorService {
         switchMap(async (doc: PDFDocument) => {
           const font = await doc.embedFont(StandardFonts.HelveticaBold);
           const page = doc.getPage(0);
-          const draw = ((p, f) => (text, x, y) => {
+          const draw = ((p, f) => (text, x, y, size = 11) => {
             p.drawText(text, {
               x,
               y,
-              size: 11,
+              size,
               font: f,
               color: rgb(0, 0, 0),
             });
@@ -50,6 +50,46 @@ export class PdfPublicGeneratorService {
             380,
             180
           );
+
+          draw(data.name, 79, 482, 10);
+          page.drawText(data.ministry, {
+            font,
+            x: 79,
+            y: 456,
+            size: 10,
+            color: rgb(0, 0, 0),
+            maxWidth: 256,
+            lineHeight: 13,
+          });
+          draw(data.rank, 79, 417, 10);
+
+          page.drawText(data.home_address, {
+            font,
+            x: 79,
+            y: 391,
+            size: 10,
+            color: rgb(0, 0, 0),
+            maxWidth: 256,
+            lineHeight: 13,
+          });
+
+          page.drawText(data.work_address, {
+            font,
+            x: 79,
+            y: 352,
+            size: 10,
+            color: rgb(0, 0, 0),
+            maxWidth: 256,
+            lineHeight: 13,
+          });
+
+          draw(data.work_days.toString(), 200, 311, 10);
+
+          // yes / no check
+          if (data.mobility !== 'no') {
+            draw('x', 94, 286);
+            draw(data.mobility_date, 230, 286, 10);
+          } else draw('x', 94, 273);
 
           // set metadata
           doc.setTitle("Attestation sur l'honneur de covoiturage");

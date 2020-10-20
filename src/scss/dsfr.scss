@@ -3122,6 +3122,10 @@ ol {
   &:not(:last-child) {
     margin-bottom: 1.5rem;
   }
+  .rf-description {
+    font-size: 80%;
+    color: var(--g400);
+  }
 }
 .rf-select-group--valid {
   .rf-label {
