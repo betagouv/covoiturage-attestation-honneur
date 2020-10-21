@@ -79,6 +79,7 @@ export class FormLimitedComponent implements OnInit {
   }
 
   onReset(): void {
+    this.profileForm.setErrors(null);
     localStorage.removeItem('formLtd');
   }
 

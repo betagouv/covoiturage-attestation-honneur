@@ -16,9 +16,13 @@ import {
   forwardRef,
 } from '@angular/core';
 import {
-  ControlValueAccessor,
+  Validator,
   FormControl,
+  ControlValueAccessor,
+  AbstractControl,
+  ValidationErrors,
   NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
 } from '@angular/forms';
 import { CompanyService } from 'src/app/services/company.service';
 
@@ -32,11 +36,16 @@ import { CompanyService } from 'src/app/services/company.service';
       useExisting: forwardRef(() => AutocompleteCompanyFormComponent),
       multi: true,
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => AutocompleteCompanyFormComponent),
+      multi: true,
+    },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutocompleteCompanyFormComponent
-  implements OnInit, ControlValueAccessor {
+  implements OnInit, ControlValueAccessor, Validator {
   @ViewChild('autocomplete', { static: true }) autocomplete: ElementRef<any>;
 
   items: Array<string> = [];
@@ -73,6 +82,7 @@ export class AutocompleteCompanyFormComponent
   private onChange = (_: string) => {};
   private onTouch = () => {};
 
+  // hide the dropdown when clicks anywhere else
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement) {
     const clickedInside = this.autocomplete.nativeElement.contains(
@@ -90,8 +100,11 @@ export class AutocompleteCompanyFormComponent
     this.onTouch();
   }
 
-  writeValue(item: string): void {
-    this.onChange(item);
+  writeValue(val: string): void {
+    this.search.setValue(val, { emitEvent: false });
+    this.onChange(val); // update the parent model
+    this.onTouch();
+    this.closeDropdown();
   }
 
   registerOnChange(fn: any): void {
@@ -108,10 +121,7 @@ export class AutocompleteCompanyFormComponent
 
   onItemClick(item: string) {
     if (!this.disabled) {
-      console.log('click', item);
-      this.search.setValue(item, { emitEvent: false });
-      this.open = false;
-      this.onChange(item);
+      this.writeValue(item);
     }
   }
 
@@ -123,5 +133,9 @@ export class AutocompleteCompanyFormComponent
 
   closeDropdown() {
     this.open = false;
+  }
+
+  validate(c: AbstractControl): ValidationErrors | null {
+    return c.errors;
   }
 }

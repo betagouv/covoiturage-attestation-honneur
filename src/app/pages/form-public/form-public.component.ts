@@ -40,7 +40,7 @@ export class FormPublicComponent implements OnInit {
       Validators.max(365),
       Validators.pattern(/^[0-9]{0,6}$/),
     ]),
-    home_address: new FormControl('', [
+    home_address: new FormControl(null, [
       Validators.required,
       Validators.maxLength(256),
     ]),

@@ -16,9 +16,13 @@ import {
   forwardRef,
 } from '@angular/core';
 import {
-  ControlValueAccessor,
+  Validator,
   FormControl,
+  ControlValueAccessor,
+  AbstractControl,
+  ValidationErrors,
   NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
 } from '@angular/forms';
 import { AddressService } from 'src/app/services/address.service';
 
@@ -32,10 +36,16 @@ import { AddressService } from 'src/app/services/address.service';
       useExisting: forwardRef(() => AutocompleteFormComponent),
       multi: true,
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => AutocompleteFormComponent),
+      multi: true,
+    },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
+export class AutocompleteFormComponent
+  implements OnInit, ControlValueAccessor, Validator {
   @ViewChild('autocomplete', { static: true }) autocomplete: ElementRef<any>;
 
   items: Array<string> = [];
@@ -72,6 +82,7 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
   private onChange = (_: string) => {};
   private onTouch = () => {};
 
+  // hide the dropdown when clicks anywhere else
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement) {
     const clickedInside = this.autocomplete.nativeElement.contains(
@@ -89,8 +100,11 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
     this.onTouch();
   }
 
-  writeValue(item: string): void {
-    this.onChange(item);
+  writeValue(val: string): void {
+    this.search.setValue(val, { emitEvent: false });
+    this.onChange(val); // update the parent model
+    this.onTouch();
+    this.closeDropdown();
   }
 
   registerOnChange(fn: any): void {
@@ -107,10 +121,7 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
 
   onItemClick(item: string) {
     if (!this.disabled) {
-      console.log('click', item);
-      this.search.setValue(item, { emitEvent: false });
-      this.open = false;
-      this.onChange(item);
+      this.writeValue(item);
     }
   }
 
@@ -122,5 +133,9 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
 
   closeDropdown() {
     this.open = false;
+  }
+
+  validate(c: AbstractControl): ValidationErrors | null {
+    return c.errors;
   }
 }
