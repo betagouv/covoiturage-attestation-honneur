@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CounterService } from 'src/app/services/counter.service';
 import { AddressService } from '../../services/address.service';
 import { CompanyService } from '../../services/company.service';
@@ -57,11 +57,7 @@ export class FormLimitedComponent implements OnInit {
 
     // auto-save
     this.profileForm.valueChanges
-      .pipe(
-        debounceTime(250),
-        distinctUntilChanged(),
-        filter((o: object) => !!Object.values(o).filter((v) => !!v).length)
-      )
+      .pipe(debounceTime(250), distinctUntilChanged())
       .subscribe((o: object) => {
         localStorage.setItem('formLtd', JSON.stringify(o));
       });

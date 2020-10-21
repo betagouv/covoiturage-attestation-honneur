@@ -3,6 +3,11 @@
 <form [formGroup]="profileForm" (submit)="onSubmit()" (reset)="onReset()">
   <h4>Secteur public</h4>
 
+  <p class="rf-highlight">
+    Les champs suivis d'un
+    <span class="rf-label--required"></span> sont obligatoires.
+  </p>
+
   <!-- name -->
   <div class="rf-input-group">
     <label class="rf-label rf-label--required">Je soussigné·e</label>
@@ -186,7 +191,7 @@
   <!-- Home address -->
   <div class="rf-input-group">
     <label class="rf-label rf-label--required">Adresse du domicile</label>
-    <app-autocomplete formControlName="home_address"></app-autocomplete>
+    <app-ac-address formControlName="home_address"></app-ac-address>
     <p *ngIf="showError('home_address', 'required')" class="rf-error-text">
       L'adresse du domicile est requise
     </p>
@@ -198,7 +203,7 @@
   <!-- Work address -->
   <div class="rf-input-group">
     <label class="rf-label rf-label--required">Lieu de travail</label>
-    <app-autocomplete formControlName="work_address"></app-autocomplete>
+    <app-ac-address formControlName="work_address"></app-ac-address>
     <p *ngIf="showError('work_address', 'required')" class="rf-error-text">
       Le lieu de travail est requis
     </p>

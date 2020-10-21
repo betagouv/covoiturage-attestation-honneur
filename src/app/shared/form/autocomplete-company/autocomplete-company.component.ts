@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import {
   tap,
   debounceTime,
@@ -16,18 +17,14 @@ import {
   forwardRef,
 } from '@angular/core';
 import {
-  Validator,
   FormControl,
   ControlValueAccessor,
-  AbstractControl,
-  ValidationErrors,
   NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
 } from '@angular/forms';
 import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
-  selector: 'app-autocomplete-company',
+  selector: 'app-ac-company',
   templateUrl: './autocomplete-company.component.html',
   styleUrls: ['./autocomplete-company.component.scss'],
   providers: [
@@ -36,16 +33,11 @@ import { CompanyService } from 'src/app/services/company.service';
       useExisting: forwardRef(() => AutocompleteCompanyFormComponent),
       multi: true,
     },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => AutocompleteCompanyFormComponent),
-      multi: true,
-    },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutocompleteCompanyFormComponent
-  implements OnInit, ControlValueAccessor, Validator {
+  implements OnInit, ControlValueAccessor {
   @ViewChild('autocomplete', { static: true }) autocomplete: ElementRef<any>;
 
   items: Array<string> = [];
@@ -53,6 +45,7 @@ export class AutocompleteCompanyFormComponent
   open = false;
   disabled = false;
   loading = false;
+  result = new Subject<string | null>();
 
   constructor(
     private service: CompanyService,
@@ -64,6 +57,12 @@ export class AutocompleteCompanyFormComponent
       .pipe(
         debounceTime(250),
         distinctUntilChanged(),
+        // reset value to null if empty
+        tap((v) => {
+          if (v.trim() === '') this.writeValue(null);
+        }),
+
+        // filter out empty strings to avoid search nothing
         filter((v) => v.trim().length > 1),
         tap(() => {
           this.loading = true;
@@ -79,7 +78,6 @@ export class AutocompleteCompanyFormComponent
       });
   }
 
-  private onChange = (_: string) => {};
   private onTouch = () => {};
 
   // hide the dropdown when clicks anywhere else
@@ -101,14 +99,14 @@ export class AutocompleteCompanyFormComponent
   }
 
   writeValue(val: string): void {
+    this.result.next(val);
     this.search.setValue(val, { emitEvent: false });
-    this.onChange(val); // update the parent model
     this.onTouch();
     this.closeDropdown();
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this.result.subscribe(fn);
   }
 
   registerOnTouched(fn: any): void {
@@ -133,9 +131,5 @@ export class AutocompleteCompanyFormComponent
 
   closeDropdown() {
     this.open = false;
-  }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    return c.errors;
   }
 }

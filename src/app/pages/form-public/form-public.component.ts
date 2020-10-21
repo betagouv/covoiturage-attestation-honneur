@@ -6,7 +6,7 @@ import {
   FormArray,
   AbstractControl,
 } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CounterService } from '../../services/counter.service';
 import { AddressService } from '../../services/address.service';
 import { CompanyService } from '../../services/company.service';
@@ -103,11 +103,7 @@ export class FormPublicComponent implements OnInit {
 
     // auto-save
     this.profileForm.valueChanges
-      .pipe(
-        debounceTime(250),
-        distinctUntilChanged(),
-        filter((o: object) => !!Object.values(o).filter((v) => !!v).length)
-      )
+      .pipe(debounceTime(250), distinctUntilChanged())
       .subscribe((o: object) => {
         localStorage.setItem('formPublic', JSON.stringify(o));
       });
