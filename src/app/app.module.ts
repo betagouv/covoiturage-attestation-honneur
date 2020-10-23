@@ -12,7 +12,6 @@ import { CompanyService } from './services/company.service';
 import { AddressService } from './services/address.service';
 import { PdfLimitedGeneratorService } from './services/pdfLimited.service';
 import { AutocompleteFormComponent } from './shared/form/autocomplete/autocomplete.component';
-import { AutocompleteCompanyFormComponent } from './shared/form/autocomplete-company/autocomplete-company.component';
 import { DarkModeToggleComponent } from './shared/ui/dark-mode-toggle/dark-mode-toggle.component';
 import { FormPickatypeComponent } from './pages/form-pickatype/form-pickatype.component';
 import { FormPublicComponent } from './pages/form-public/form-public.component';
@@ -27,7 +26,6 @@ import { FormEmployerComponent } from './pages/form-employer/form-employer.compo
     FormPickatypeComponent,
     FormPublicComponent,
     FormEmployerComponent,
-    AutocompleteCompanyFormComponent,
   ],
   imports: [
     CommonModule,
