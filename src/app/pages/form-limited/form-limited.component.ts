@@ -14,27 +14,32 @@ import { PdfLimitedGeneratorService } from '../../services/pdfLimited.service';
 export class FormLimitedComponent implements OnInit {
   // configure the form fields
   profileForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.maxLength(128)]),
-    address: new FormControl('', [
+    name: new FormControl(null, [Validators.required, Validators.maxLength(128)]),
+    address: new FormControl(null, [
       Validators.required,
       Validators.maxLength(256),
     ]),
-    employer: new FormControl('', [
+    employer: new FormControl(null, [
       Validators.required,
       Validators.maxLength(128),
     ]),
-    distance: new FormControl('', [
+    distance: new FormControl(null, [
       Validators.max(100000),
       Validators.pattern(/^[0-9]{0,6}$/),
     ]),
-    days: new FormControl('', [
+    days: new FormControl(null, [
       Validators.max(365),
       Validators.pattern(/^[0-9]{0,6}$/),
     ]),
-    location: new FormControl('', [
+    location: new FormControl(null, [
       Validators.required,
       Validators.maxLength(128),
     ]),
+  }, {
+    validators: [(fg: FormGroup) => {
+      if (fg.pristine) return null;
+      return fg.value.distance || fg.value.days ? null : {distanceOrDays: true};
+    }]
   });
 
   constructor(
