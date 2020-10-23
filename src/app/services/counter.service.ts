@@ -1,14 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CounterService {
-  // private apiUrl = 'https://api.covoiturage.beta.gouv.fr';
-  private apiUrl = 'http://localhost:8080';
-  private allowedOrigins = [
-    'http://localhost:4200',
-    'https://attestation.covoiturage.beta.gouv.fr',
-  ];
+  private apiUrl = environment.apiUrl || 'http://localhost:8080';
+  private allowedOrigins = environment.allowedOrigins || [ 'http://localhost:4200' ];
 
   constructor(private http: HttpClient) {}
 
