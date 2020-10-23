@@ -25,6 +25,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.DEPLOY_KEY }}
-          source: dist/attestation
+          source: dist/attestation/*
           target: www/attestation
           rm: true
