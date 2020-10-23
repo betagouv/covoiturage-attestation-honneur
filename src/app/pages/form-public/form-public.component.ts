@@ -107,6 +107,16 @@ export class FormPublicComponent implements OnInit {
       .subscribe((o: object) => {
         localStorage.setItem('formPublic', JSON.stringify(o));
       });
+
+    // set mobility_date required stated
+    this.profileForm.get('mobility').valueChanges.subscribe(value => {
+      if (value === 'no') {
+        this.profileForm.get('mobility_date').clearValidators();
+      } else {
+        this.profileForm.get('mobility_date').setValidators(Validators.required);
+      }
+      this.profileForm.get('mobility_date').updateValueAndValidity();
+    })
   }
 
   showError(fieldName: string, errorName: string) {

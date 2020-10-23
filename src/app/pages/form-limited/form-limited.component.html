@@ -35,7 +35,7 @@
   <!-- Employer -->
   <div class="rf-input-group">
     <label class="rf-label rf-label--required">Nom de l'employeur</label>
-    <app-ac-company formControlName="employer"></app-ac-company>
+    <input class="rf-input" formControlName="employer" required />
     <p *ngIf="showError('employer', 'required')" class="rf-error-text">
       Le nom de l'employeur est requis
     </p>
@@ -47,31 +47,9 @@
   <h4>Covoiturage</h4>
 
   <!-- Distance -->
-  <div class="carpool-wrapper">
-    <div class="rf-input-group">
-      <label class="rf-label">Nombre de kilomètres</label>
-      <input class="rf-input" formControlName="distance" maxlength="6" [ngClass]="{'ng-invalid': profileForm.hasError('distanceOrDays')}" />
-    </div>
-
-    <h5 class="h-text-center">ET / OU</h5>
-
-    <!-- Days -->
-    <div class="rf-input-group">
-      <label class="rf-label">Nombre de jours de covoiturage</label>
-      <input class="rf-input" formControlName="days" maxlength="3" [ngClass]="{'ng-invalid': profileForm.hasError('distanceOrDays')}" />
-    </div>
-  </div>
-
   <div class="rf-input-group">
-    <p class="rf-description">
-      <em class="rf-label--required">Indiquer l'une, l'autre ou les deux informations.</em>
-    </p>
-    <!-- shared errors -->
-    <p *ngIf="profileForm.hasError('distanceOrDays')" class="rf-error-text">
-      La distance ou le nombre de jours est requis
-    </p>
-
-    <!-- distance errors -->
+    <label class="rf-label">Nombre de kilomètres par trajet</label>
+    <input class="rf-input" formControlName="distance" maxlength="6" />
     <p *ngIf="showError('distance', 'max')" class="rf-error-text">
       La distance ne peut dépasser 100000&nbsp;km
     </p>
@@ -81,8 +59,12 @@
     <p *ngIf="showError('distance', 'pattern')" class="rf-error-text">
       Ce champ n'accepte que les chiffres
     </p>
+  </div>
 
-    <!-- days errors -->
+  <!-- Days -->
+  <div class="rf-input-group">
+    <label class="rf-label">Nombre de jours de covoiturage</label>
+    <input class="rf-input" formControlName="days" maxlength="3" />
     <p *ngIf="showError('days', 'max')" class="rf-error-text">
       Le nombre de jours ne peut dépasser 365
     </p>
@@ -92,7 +74,7 @@
     <p *ngIf="showError('days', 'pattern')" class="rf-error-text">
       Ce champ n'accepte que les chiffres
     </p>
-</div>
+  </div>
 
   <h4>Signature</h4>
 

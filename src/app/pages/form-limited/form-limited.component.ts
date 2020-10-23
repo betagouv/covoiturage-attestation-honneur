@@ -35,11 +35,6 @@ export class FormLimitedComponent implements OnInit {
       Validators.required,
       Validators.maxLength(128),
     ]),
-  }, {
-    validators: [(fg: FormGroup) => {
-      if (fg.pristine) return null;
-      return fg.value.distance || fg.value.days ? null : {distanceOrDays: true};
-    }]
   });
 
   constructor(

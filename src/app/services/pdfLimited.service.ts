@@ -41,16 +41,18 @@ export class PdfLimitedGeneratorService {
 
           draw(data.name, 80, 650);
           draw(data.address, 140, 620);
-          draw(data.employer, 180, 560);
-          draw(data.distance.toString(), 418, 417);
-          draw(data.days.toString(), 225, 397);
-          draw(data.location, 120, 255);
+          draw(data.employer, 140, 589);
+          draw(data.distance.toString(), 418, 447);
+          if (data.distance) draw('x', 128, 446.5);
+          draw(data.days.toString(), 225, 426);
+          if (data.days) draw('x', 128, 426);
+          draw(data.location, 120, 284);
 
           const now = new Date();
           draw(
             `${now.getDate()}/${now.getMonth()}/${now.getFullYear()}`,
             120,
-            234
+            263
           );
 
           // set metadata
