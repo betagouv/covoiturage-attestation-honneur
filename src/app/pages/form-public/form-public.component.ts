@@ -32,15 +32,11 @@ export class FormPublicComponent implements OnInit {
     year: new FormControl(this.currentYear, [Validators.required]),
     mobility: new FormControl('no', [Validators.required]),
     mobility_date: new FormControl('', [Validators.required]),
-    work_days: new FormControl('', [
-      Validators.max(365),
-      Validators.pattern(/^[0-9]{0,6}$/),
-    ]),
     days: new FormControl('', [
       Validators.max(365),
       Validators.pattern(/^[0-9]{0,6}$/),
     ]),
-    home_address: new FormControl(null, [
+    home_address: new FormControl('', [
       Validators.required,
       Validators.maxLength(256),
     ]),
@@ -109,14 +105,16 @@ export class FormPublicComponent implements OnInit {
       });
 
     // set mobility_date required stated
-    this.profileForm.get('mobility').valueChanges.subscribe(value => {
+    this.profileForm.get('mobility').valueChanges.subscribe((value) => {
       if (value === 'no') {
         this.profileForm.get('mobility_date').clearValidators();
       } else {
-        this.profileForm.get('mobility_date').setValidators(Validators.required);
+        this.profileForm
+          .get('mobility_date')
+          .setValidators(Validators.required);
       }
       this.profileForm.get('mobility_date').updateValueAndValidity();
-    })
+    });
   }
 
   showError(fieldName: string, errorName: string) {

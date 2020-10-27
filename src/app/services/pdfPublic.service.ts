@@ -83,8 +83,6 @@ export class PdfPublicGeneratorService {
             lineHeight: 13,
           });
 
-          draw(data.work_days.toString(), 200, 311, 10);
-
           // yes / no check
           if (data.mobility !== 'no') {
             draw('x', 94, 286);

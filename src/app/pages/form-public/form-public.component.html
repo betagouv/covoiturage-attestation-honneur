@@ -136,38 +136,6 @@
     </fieldset>
   </div>
 
-  <!-- Days of work -->
-  <div class="rf-input-group">
-    <label class="rf-label rf-label--required">
-      Quotité travaillée sur l'année {{ profileForm.get("year").value }}
-    </label>
-    <input
-      class="rf-input"
-      formControlName="work_days"
-      required
-      maxlength="3"
-    />
-    <p *ngIf="showError('work_days', 'required')" class="rf-error-text">
-      La quotité est requise
-    </p>
-    <p *ngIf="showError('work_days', 'max')" class="rf-error-text">
-      La quotité ne peut dépasser 365
-    </p>
-    <p *ngIf="showError('work_days', 'min')" class="rf-error-text">
-      La quotité ne peut être inférieur à 1
-    </p>
-    <p *ngIf="showError('work_days', 'pattern')" class="rf-error-text">
-      Ce champ n'accepte que les chiffres
-    </p>
-
-    <p class="rf-description">
-      <em>
-        Le nombre de jours requis est modulé en fonction du temps de présence
-        et/ou de la quotité de travail sur l’année.
-      </em>
-    </p>
-  </div>
-
   <!-- Days -->
   <div class="rf-input-group">
     <label class="rf-label rf-label--required">
