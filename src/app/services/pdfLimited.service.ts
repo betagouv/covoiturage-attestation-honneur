@@ -42,10 +42,48 @@ export class PdfLimitedGeneratorService {
           draw(data.name, 80, 650);
           draw(data.address, 140, 620);
           draw(data.employer, 140, 589);
-          draw(data.distance.toString(), 418, 447);
-          if (data.distance) draw('x', 128, 446.5);
-          draw(data.days.toString(), 225, 426);
-          if (data.days) draw('x', 128, 426);
+
+          // tick checkbox and set value
+          // or mask the whole line
+          if (data.distance) {
+            draw('x', 128, 446.5);
+            draw(data.distance.toString(), 418, 447);
+          } else {
+            page.drawRectangle({
+              x: 125,
+              y: 442,
+              width: 400,
+              height: 18,
+              color: rgb(1, 1, 1),
+            });
+          }
+
+          // tick checkbox and set value
+          // or mask the whole line
+          if (data.days) {
+            draw(data.days.toString(), 225, 426);
+            draw('x', 128, 426);
+          } else {
+            page.drawRectangle({
+              x: 125,
+              y: 422,
+              width: 400,
+              height: 18,
+              color: rgb(1, 1, 1),
+            });
+          }
+
+          // hide the whole section when no data
+          if (!data.distance && !data.days) {
+            page.drawRectangle({
+              x: 70,
+              y: 470,
+              width: 140,
+              height: 18,
+              color: rgb(1, 1, 1),
+            });
+          }
+
           draw(data.location, 120, 284);
 
           const now = new Date();
