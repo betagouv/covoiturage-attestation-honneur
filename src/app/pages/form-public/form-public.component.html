@@ -171,7 +171,7 @@
   <!-- Work address -->
   <div class="rf-input-group">
     <label class="rf-label rf-label--required">Lieu de travail</label>
-    <app-ac-address formControlName="work_address"></app-ac-address>
+    <input class="rf-input" formControlName="work_address" required />
     <p *ngIf="showError('work_address', 'required')" class="rf-error-text">
       Le lieu de travail est requis
     </p>
