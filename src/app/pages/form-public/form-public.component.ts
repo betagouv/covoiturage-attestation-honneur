@@ -149,7 +149,9 @@ export class FormPublicComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.pdf.generate(this.profileForm.value);
+    this.pdf.generate(this.profileForm.value, {
+      onComplete: () => alert('Attestation générée'),
+    });
     this.counter.save(window.origin, 'public');
   }
 

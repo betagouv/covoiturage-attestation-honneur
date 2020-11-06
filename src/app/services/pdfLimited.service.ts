@@ -13,7 +13,22 @@ import { certFilename } from '../shared/helpers/certFilename.helper';
 export class PdfLimitedGeneratorService {
   constructor(private http: HttpClient) {}
 
-  generate(data: ProfileLimitedFormInterface) {
+  generate(
+    data: ProfileLimitedFormInterface,
+    obs?: { onComplete?: Function; onError?: Function }
+  ) {
+    const observer = {
+      next: (pdfBytes) => {
+        saveAs(
+          new Blob([pdfBytes], { type: 'application/pdf' }),
+          certFilename(data.name)
+        );
+      },
+    };
+
+    if (obs.onError) observer['error'] = obs.onError;
+    if (obs.onComplete) observer['complete'] = obs.onComplete;
+
     this.http
       .get('/assets/certificate_ltd.pdf', { responseType: 'arraybuffer' })
       .pipe(
@@ -104,9 +119,7 @@ export class PdfLimitedGeneratorService {
           return doc.save();
         })
       )
-      .subscribe((pdfBytes) => {
-        saveAs(new Blob([pdfBytes]), certFilename(data.name));
-      });
+      .subscribe(observer);
   }
 
   private handleError(err): ObservableInput<any> {

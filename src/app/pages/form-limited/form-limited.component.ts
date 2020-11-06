@@ -14,7 +14,10 @@ import { PdfLimitedGeneratorService } from '../../services/pdfLimited.service';
 export class FormLimitedComponent implements OnInit {
   // configure the form fields
   profileForm = new FormGroup({
-    name: new FormControl(null, [Validators.required, Validators.maxLength(128)]),
+    name: new FormControl(null, [
+      Validators.required,
+      Validators.maxLength(128),
+    ]),
     address: new FormControl(null, [
       Validators.required,
       Validators.maxLength(256),
@@ -80,7 +83,9 @@ export class FormLimitedComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.pdf.generate(this.profileForm.value);
+    this.pdf.generate(this.profileForm.value, {
+      onComplete: () => alert('Attestation générée'),
+    });
     this.counter.save(window.origin, 'limited');
   }
 }
