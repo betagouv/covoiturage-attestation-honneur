@@ -6,9 +6,21 @@ import { FormEmployerComponent } from './pages/form-employer/form-employer.compo
 
 const routes: Routes = [
   { path: '', pathMatch: 'prefix', redirectTo: 'salarie-secteur-prive' },
-  { path: 'salarie-secteur-public', component: FormPublicComponent },
-  { path: 'salarie-secteur-prive', component: FormLimitedComponent },
-  { path: 'je-suis-employeur', component: FormEmployerComponent },
+  {
+    path: 'salarie-secteur-public',
+    component: FormPublicComponent,
+    data: { title: 'Salarié du secteur public' },
+  },
+  {
+    path: 'salarie-secteur-prive',
+    component: FormLimitedComponent,
+    data: { title: 'Salarié du secteur privé' },
+  },
+  {
+    path: 'je-suis-employeur',
+    component: FormEmployerComponent,
+    data: { title: 'Employeur' },
+  },
 ];
 
 @NgModule({
