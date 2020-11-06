@@ -31,7 +31,7 @@ export class FormPublicComponent implements OnInit {
     rank: new FormControl('', [Validators.required, Validators.maxLength(51)]),
     year: new FormControl(this.currentYear, [Validators.required]),
     mobility: new FormControl('no', [Validators.required]),
-    mobility_date: new FormControl('', [Validators.required]),
+    mobility_date: new FormControl(''),
     days: new FormControl('', [
       Validators.max(365),
       Validators.pattern(/^[0-9]{0,6}$/),
