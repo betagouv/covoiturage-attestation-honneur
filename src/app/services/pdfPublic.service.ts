@@ -61,7 +61,7 @@ export class PdfPublicGeneratorService {
 
           const now = new Date();
           draw(
-            `${now.getDate()}/${now.getMonth()}/${now.getFullYear()}`,
+            `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`,
             380,
             180
           );
