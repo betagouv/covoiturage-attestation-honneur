@@ -103,7 +103,7 @@ export class PdfLimitedGeneratorService {
 
           const now = new Date();
           draw(
-            `${now.getDate()}/${now.getMonth()}/${now.getFullYear()}`,
+            `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`,
             120,
             263
           );
