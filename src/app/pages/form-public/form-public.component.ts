@@ -50,7 +50,9 @@ export class FormPublicComponent implements OnInit {
         Validators.required,
         // validate array length
         (c: AbstractControl): { [key: string]: any } =>
-          c.value.length === 11 ? null : { arrayLength: true },
+          c.value.filter((i) => !!i && i !== '').length === 11
+            ? null
+            : { arrayLength: true },
       ]
     ),
     location: new FormControl('', [
@@ -74,12 +76,14 @@ export class FormPublicComponent implements OnInit {
         const obj = JSON.parse(saved);
         this.profileForm.patchValue(obj);
         obj.chk.forEach((id: string) => {
+          if (!id) return;
           (this.profileForm.get('chk') as FormArray).push(new FormControl(id));
           // @ts-ignore
           document.getElementById(id).checked = true;
         });
       } else {
         document.querySelectorAll('[id*="checkbox_"]').forEach((box) => {
+          if (!box) return;
           // @ts-ignore
           box.checked = true;
           (this.profileForm.get('chk') as FormArray).push(
@@ -105,16 +109,12 @@ export class FormPublicComponent implements OnInit {
       });
 
     // set mobility_date required stated
-    this.profileForm.get('mobility').valueChanges.subscribe((value) => {
-      if (value === 'no') {
-        this.profileForm.get('mobility_date').clearValidators();
-      } else {
-        this.profileForm
-          .get('mobility_date')
-          .setValidators(Validators.required);
-      }
-      this.profileForm.get('mobility_date').updateValueAndValidity();
-    });
+    this.profileForm
+      .get('mobility')
+      .valueChanges.subscribe((value) => this.setMobilityValidators(value));
+
+    // init validators for existing value
+    this.setMobilityValidators(this.profileForm.get('mobility').value);
   }
 
   showError(fieldName: string, errorName: string) {
@@ -157,5 +157,14 @@ export class FormPublicComponent implements OnInit {
 
   trackByFn(index, item) {
     return item.id;
+  }
+
+  private setMobilityValidators(value): void {
+    if (value === 'no') {
+      this.profileForm.get('mobility_date').clearValidators();
+    } else {
+      this.profileForm.get('mobility_date').setValidators(Validators.required);
+    }
+    this.profileForm.get('mobility_date').updateValueAndValidity();
   }
 }

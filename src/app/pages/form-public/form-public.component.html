@@ -113,27 +113,27 @@
           <label class="rf-label" for="mobility_out">Départ</label>
         </div>
       </div>
-
-      <!-- Mobility date -->
-      <div
-        class="rf-input-group"
-        *ngIf="profileForm.get('mobility').value !== 'no'"
-      >
-        <label class="rf-label rf-label--required">
-          Date
-          <span *ngIf="profileForm.get('mobility').value === 'in'">
-            d'arrivée
-          </span>
-          <span *ngIf="profileForm.get('mobility').value === 'out'">
-            de départ
-          </span>
-        </label>
-        <input class="rf-input" formControlName="mobility_date" />
-        <p *ngIf="showError('mobility_date', 'required')" class="rf-error-text">
-          La date est requise
-        </p>
-      </div>
     </fieldset>
+
+    <!-- Mobility date -->
+    <div
+      class="rf-input-group"
+      *ngIf="profileForm.get('mobility').value !== 'no'"
+    >
+      <label class="rf-label rf-label--required">
+        Date
+        <span *ngIf="profileForm.get('mobility').value === 'in'">
+          d'arrivée
+        </span>
+        <span *ngIf="profileForm.get('mobility').value === 'out'">
+          de départ
+        </span>
+      </label>
+      <input class="rf-input" formControlName="mobility_date" />
+      <p *ngIf="showError('mobility_date', 'required')" class="rf-error-text">
+        La date est requise
+      </p>
+    </div>
   </div>
 
   <!-- Days -->
@@ -159,7 +159,7 @@
   <!-- Home address -->
   <div class="rf-input-group">
     <label class="rf-label rf-label--required">Adresse du domicile</label>
-    <app-ac-address formControlName="home_address"></app-ac-address>
+    <input class="rf-input" formControlName="home_address" required />
     <p *ngIf="showError('home_address', 'required')" class="rf-error-text">
       L'adresse du domicile est requise
     </p>
