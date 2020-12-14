@@ -23,26 +23,26 @@
   <!-- Ministry -->
   <div class="rf-input-group">
     <label class="rf-label rf-label--required">
-      Ministère / service / affectation
+      Employeur (Ministère / collectivité / établissement)
     </label>
     <input class="rf-input" formControlName="ministry" required />
     <p *ngIf="showError('ministry', 'required')" class="rf-error-text">
-      Le ministère / service / affectation est requis
+      L'employeur est requis
     </p>
     <p *ngIf="showError('ministry', 'maxlength')" class="rf-error-text">
-      Le ministère / service / affectation ne peut dépasser 120 caractères
+      L'employeur ne peut dépasser 120 caractères
     </p>
   </div>
 
   <!-- Rank -->
   <div class="rf-input-group">
-    <label class="rf-label rf-label--required">Corps / grade</label>
+    <label class="rf-label rf-label--required">Poste</label>
     <input class="rf-input" formControlName="rank" required />
     <p *ngIf="showError('rank', 'required')" class="rf-error-text">
-      Le Corps / grade est requis
+      Le poste est requis
     </p>
     <p *ngIf="showError('rank', 'maxlength')" class="rf-error-text">
-      Le Corps / grade ne peut dépasser 51 caractères
+      Le poste ne peut dépasser 51 caractères
     </p>
   </div>
 
