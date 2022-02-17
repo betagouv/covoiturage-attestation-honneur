@@ -22,4 +22,4 @@ Les [_Pull Requests_](/../../pulls) documentées sont également les bienvenues.
 
 ## Licence
 
-Licence Apache 2.0 - © DINUM 2020 - [beta.gouv](https://beta.gouv.fr)
+Licence Apache 2.0 - © DINUM 2022 - [beta.gouv](https://beta.gouv.fr)
