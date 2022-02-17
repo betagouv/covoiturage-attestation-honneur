@@ -44,11 +44,23 @@
     </p>
   </div>
 
+  <!-- Work Share -->
+  <div class="rf-input-group">
+    <label class="rf-label rf-label--required">Quotité de temps de travail (en pourcentage. 100 = temps plein)</label>
+    <input class="rf-input" formControlName="workshare" />
+    <p *ngIf="showError('workshare', 'maxlength')" class="rf-error-text">
+      La quotité ne peut dépasser 3 caractères
+    </p>
+    <p *ngIf="showError('workshare', 'pattern')" class="rf-error-text">
+      Ce champ n'accepte que les chiffres
+    </p>
+  </div>
+
   <h4>Covoiturage</h4>
 
   <!-- Distance -->
   <div class="rf-input-group">
-    <label class="rf-label">Nombre de kilomètres par trajet</label>
+    <label class="rf-label">Nombre de kilomètres par trajet <em>(facultatif)</em></label>
     <input class="rf-input" formControlName="distance" maxlength="6" />
     <p *ngIf="showError('distance', 'max')" class="rf-error-text">
       La distance ne peut dépasser 100000&nbsp;km
@@ -63,7 +75,7 @@
 
   <!-- Days -->
   <div class="rf-input-group">
-    <label class="rf-label">Nombre de jours de covoiturage</label>
+    <label class="rf-label">Nombre de jours covoiturés dans l'année <em>(facultatif)</em></label>
     <input class="rf-input" formControlName="days" maxlength="3" />
     <p *ngIf="showError('days', 'max')" class="rf-error-text">
       Le nombre de jours ne peut dépasser 365
@@ -83,10 +95,10 @@
     <label class="rf-label rf-label--required">Fait à</label>
     <input class="rf-input" formControlName="location" required />
     <p *ngIf="showError('location', 'required')" class="rf-error-text">
-      La commune de génération est requise
+      La commune est requise
     </p>
     <p *ngIf="showError('location', 'maxlength')" class="rf-error-text">
-      La commune de génération ne peut dépasser 128 caractères
+      La commune ne peut dépasser 128 caractères
     </p>
   </div>
 

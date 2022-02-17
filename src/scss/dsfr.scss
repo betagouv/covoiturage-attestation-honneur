@@ -3174,9 +3174,10 @@ ol {
 }
 .rf-label--required {
   &::after {
-    content: "*";
+    content: " *";
     margin-left: 0.1em;
     color: var(--error);
+    font-size: 20px;
   }
 }
 .rf-label--error {
@@ -3220,8 +3221,9 @@ ol {
   }
 }
 .rf-fieldset__legend {
-  margin-bottom: 1rem;
-  font-weight: 700;
+  margin-bottom: 1em;
+  font-size: 0.875rem;
+  font-weight: 400;
   + {
     .rf-hint-text {
       margin-top: -0.5rem;

@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProfilePublicFormInterface } from '../shared/interfaces/ProfilePublicForm.interface';
 import { certFilename } from '../shared/helpers/certFilename.helper';
+import { format } from '../shared/helpers/date.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -61,7 +62,7 @@ export class PdfPublicGeneratorService {
 
           const now = new Date();
           draw(
-            `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`,
+            `${format(now.getDate())}/${format(now.getMonth()+1)}/${now.getFullYear()}`,
             380,
             180
           );
@@ -92,6 +93,16 @@ export class PdfPublicGeneratorService {
             font,
             x: 79,
             y: 352,
+            size: 10,
+            color: rgb(0, 0, 0),
+            maxWidth: 256,
+            lineHeight: 13,
+          });
+
+          page.drawText(`${data.workshare}%`, {
+            font,
+            x: 210,
+            y: 311,
             size: 10,
             color: rgb(0, 0, 0),
             maxWidth: 256,

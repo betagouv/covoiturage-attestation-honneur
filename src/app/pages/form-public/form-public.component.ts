@@ -28,6 +28,11 @@ export class FormPublicComponent implements OnInit {
       Validators.required,
       Validators.maxLength(120),
     ]),
+    workshare: new FormControl(null, [
+      Validators.required,
+      Validators.maxLength(3),
+      Validators.pattern(/^[0-9]{0,3}$/),
+    ]),
     rank: new FormControl('', [Validators.required, Validators.maxLength(51)]),
     year: new FormControl(this.currentYear, [Validators.required]),
     mobility: new FormControl('no', [Validators.required]),

@@ -46,6 +46,21 @@
     </p>
   </div>
 
+  <!-- Work Share -->
+  <div class="rf-input-group">
+    <label class="rf-label rf-label--required">Quotité de temps de travail (en pourcentage. 100 = temps plein)</label>
+    <input class="rf-input" formControlName="workshare" required />
+    <p *ngIf="showError('workshare', 'required')" class="rf-error-text">
+      La quotité est requise
+    </p>
+    <p *ngIf="showError('workshare', 'maxlength')" class="rf-error-text">
+      La quotité ne peut dépasser 3 caractères
+    </p>
+    <p *ngIf="showError('workshare', 'pattern')" class="rf-error-text">
+      Ce champ n'accepte que les chiffres
+    </p>
+  </div>
+
   <!-- Year -->
   <div class="rf-form-group">
     <fieldset class="rf-fieldset rf-fieldset--inline">
@@ -139,7 +154,7 @@
   <!-- Days -->
   <div class="rf-input-group">
     <label class="rf-label rf-label--required">
-      Nombre de jours de covoiturés
+      Nombre de jours covoiturés dans l'année
     </label>
     <input class="rf-input" formControlName="days" required maxlength="3" />
     <p *ngIf="showError('days', 'required')" class="rf-error-text">

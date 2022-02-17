@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProfileLimitedFormInterface } from '../shared/interfaces/ProfileLimitedForm.interface';
 import { certFilename } from '../shared/helpers/certFilename.helper';
+import { format } from '../shared/helpers/date.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -57,12 +58,13 @@ export class PdfLimitedGeneratorService {
           draw(data.name, 80, 650);
           draw(data.address, 140, 620);
           draw(data.employer, 140, 589);
+          draw(`${data.workshare}%`, 220, 559);
 
           // tick checkbox and set value
           // or mask the whole line
           if (data.distance) {
-            draw('x', 128, 446.5);
-            draw(data.distance.toString(), 418, 447);
+            draw('x', 128, 401.5);
+            draw(data.distance.toString(), 418, 402);
           } else {
             page.drawRectangle({
               x: 125,
@@ -76,12 +78,12 @@ export class PdfLimitedGeneratorService {
           // tick checkbox and set value
           // or mask the whole line
           if (data.days) {
-            draw(data.days.toString(), 225, 426);
-            draw('x', 128, 426);
+            draw(data.days.toString(), 225, 381);
+            draw('x', 128, 381);
           } else {
             page.drawRectangle({
               x: 125,
-              y: 422,
+              y: 377,
               width: 400,
               height: 18,
               color: rgb(1, 1, 1),
@@ -92,20 +94,20 @@ export class PdfLimitedGeneratorService {
           if (!data.distance && !data.days) {
             page.drawRectangle({
               x: 70,
-              y: 470,
+              y: 425,
               width: 140,
               height: 18,
               color: rgb(1, 1, 1),
             });
           }
 
-          draw(data.location, 120, 284);
+          draw(data.location, 120, 239);
 
           const now = new Date();
           draw(
-            `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`,
+            `${format(now.getDate())}/${format(now.getMonth()+1)}/${now.getFullYear()}`,
             120,
-            263
+            218
           );
 
           // set metadata

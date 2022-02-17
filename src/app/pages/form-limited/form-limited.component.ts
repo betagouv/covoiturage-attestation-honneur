@@ -26,6 +26,10 @@ export class FormLimitedComponent implements OnInit {
       Validators.required,
       Validators.maxLength(128),
     ]),
+    workshare: new FormControl(null, [
+      Validators.maxLength(3),
+      Validators.pattern(/^[0-9]{0,3}$/),
+    ]),
     distance: new FormControl(null, [
       Validators.max(100000),
       Validators.pattern(/^[0-9]{0,6}$/),
