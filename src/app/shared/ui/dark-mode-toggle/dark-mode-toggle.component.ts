@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 type Scheme = 'dark' | 'light';
 
@@ -8,7 +8,7 @@ type Scheme = 'dark' | 'light';
   templateUrl: './dark-mode-toggle.component.html',
 })
 export class DarkModeToggleComponent implements OnInit {
-  toggle = new FormControl();
+  toggle = new UntypedFormControl();
 
   private scheme: Scheme = 'light';
 

@@ -17,7 +17,7 @@ import {
   forwardRef,
 } from '@angular/core';
 import {
-  FormControl,
+  UntypedFormControl,
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
@@ -40,7 +40,7 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
   @ViewChild('autocomplete', { static: true }) autocomplete: ElementRef<any>;
 
   items: Array<string> = [];
-  search = new FormControl();
+  search = new UntypedFormControl();
   open = false;
   disabled = false;
   loading = false;
