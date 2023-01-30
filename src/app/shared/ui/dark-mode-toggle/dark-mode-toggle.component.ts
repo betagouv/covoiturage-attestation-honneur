@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 type Scheme = 'dark' | 'light';
 
@@ -8,7 +8,7 @@ type Scheme = 'dark' | 'light';
   templateUrl: './dark-mode-toggle.component.html',
 })
 export class DarkModeToggleComponent implements OnInit {
-  toggle = new FormControl();
+  toggle = new UntypedFormControl();
 
   private scheme: Scheme = 'light';
 
@@ -17,7 +17,7 @@ export class DarkModeToggleComponent implements OnInit {
   ngOnInit(): void {
     // fetch the user value from localStorage
     // or fallback to browser preferences. Defaults to light
-    const ls = localStorage.getItem('scheme');
+    const ls = localStorage.getItem('scheme') || this.scheme;
 
     this.scheme =
       ['dark', 'light'].indexOf(ls) > -1
@@ -29,12 +29,12 @@ export class DarkModeToggleComponent implements OnInit {
     this.apply(this.scheme);
     this.toggle.setValue(this.scheme === 'dark', { emitEvent: false });
 
-    this.toggle.valueChanges.subscribe((isDark) => {
+    this.toggle.valueChanges.subscribe((isDark: boolean) => {
       this.apply(isDark ? 'dark' : 'light');
     });
   }
 
-  private apply(scheme) {
+  private apply(scheme: string) {
     localStorage.setItem('scheme', scheme);
     document.documentElement.setAttribute('data-theme', scheme);
   }

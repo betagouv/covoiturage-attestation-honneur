@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormGroup,
-  FormControl,
+  UntypedFormGroup,
+  UntypedFormControl,
   Validators,
-  FormArray,
+  UntypedFormArray,
   AbstractControl,
+  FormControl,
 } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CounterService } from '../../services/counter.service';
@@ -18,49 +19,52 @@ import { PdfPublicGeneratorService } from '../../services/pdfPublic.service';
   styleUrls: ['./form-public.component.scss'],
 })
 export class FormPublicComponent implements OnInit {
+  // Nuber 
+  private readonly CHECKBOXES_COUNT = 9;
+
   // configure the form fields
   currentYear: number = new Date().getFullYear();
   previousYear: number = new Date().getFullYear() - 1;
 
-  profileForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.maxLength(51)]),
-    ministry: new FormControl('', [
+  profileForm = new UntypedFormGroup({
+    name: new UntypedFormControl('', [Validators.required, Validators.maxLength(51)]),
+    ministry: new UntypedFormControl('', [
       Validators.required,
       Validators.maxLength(120),
     ]),
-    workshare: new FormControl(null, [
+    workshare: new UntypedFormControl(null, [
       Validators.required,
       Validators.maxLength(3),
       Validators.pattern(/^[0-9]{0,3}$/),
     ]),
-    rank: new FormControl('', [Validators.required, Validators.maxLength(51)]),
-    year: new FormControl(this.currentYear, [Validators.required]),
-    mobility: new FormControl('no', [Validators.required]),
-    mobility_date: new FormControl(''),
-    days: new FormControl('', [
+    rank: new UntypedFormControl('', [Validators.required, Validators.maxLength(51)]),
+    year: new UntypedFormControl(this.currentYear, [Validators.required]),
+    mobility: new UntypedFormControl('no', [Validators.required]),
+    mobility_date: new UntypedFormControl(''),
+    days: new UntypedFormControl('', [
       Validators.max(365),
       Validators.pattern(/^[0-9]{0,6}$/),
     ]),
-    home_address: new FormControl('', [
+    home_address: new UntypedFormControl('', [
       Validators.required,
       Validators.maxLength(256),
     ]),
-    work_address: new FormControl('', [
+    work_address: new UntypedFormControl('', [
       Validators.required,
       Validators.maxLength(256),
     ]),
-    chk: new FormArray(
+    chk: new UntypedFormArray(
       [],
       [
         Validators.required,
         // validate array length
-        (c: AbstractControl): { [key: string]: any } =>
-          c.value.filter((i) => !!i && i !== '').length === 11
+        (c: AbstractControl<string[]>): { [key: string]: any } | null =>
+          c.value.filter((i) => !!i && i !== '').length === this.CHECKBOXES_COUNT
             ? null
             : { arrayLength: true },
       ]
     ),
-    location: new FormControl('', [
+    location: new UntypedFormControl('', [
       Validators.required,
       Validators.maxLength(128),
     ]),
@@ -71,7 +75,7 @@ export class FormPublicComponent implements OnInit {
     protected companyService: CompanyService,
     private pdf: PdfPublicGeneratorService,
     private counter: CounterService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // reload saved data in a crash free way
@@ -82,7 +86,7 @@ export class FormPublicComponent implements OnInit {
         this.profileForm.patchValue(obj);
         obj.chk.forEach((id: string) => {
           if (!id) return;
-          (this.profileForm.get('chk') as FormArray).push(new FormControl(id));
+          (this.profileForm.get('chk') as UntypedFormArray).push(new UntypedFormControl(id));
           // @ts-ignore
           document.getElementById(id).checked = true;
         });
@@ -91,8 +95,8 @@ export class FormPublicComponent implements OnInit {
           if (!box) return;
           // @ts-ignore
           box.checked = true;
-          (this.profileForm.get('chk') as FormArray).push(
-            new FormControl(box.getAttribute('id'))
+          (this.profileForm.get('chk') as UntypedFormArray).push(
+            new UntypedFormControl(box.getAttribute('id'))
           );
         });
 
@@ -114,29 +118,30 @@ export class FormPublicComponent implements OnInit {
       });
 
     // set mobility_date required stated
-    this.profileForm
-      .get('mobility')
-      .valueChanges.subscribe((value) => this.setMobilityValidators(value));
+    this.profileForm.get('mobility')?.valueChanges.subscribe((value) => this.setMobilityValidators(value));
 
     // init validators for existing value
-    this.setMobilityValidators(this.profileForm.get('mobility').value);
+    this.setMobilityValidators(this.profileForm.get('mobility')?.value);
   }
 
   showError(fieldName: string, errorName: string) {
     return (
-      this.profileForm.get(fieldName).dirty &&
-      this.profileForm.get(fieldName).hasError(errorName)
+      this.profileForm.get(fieldName)?.dirty &&
+      this.profileForm.get(fieldName)?.hasError(errorName)
     );
   }
 
-  onChkChange(event): void {
-    const fa = this.profileForm.get('chk') as FormArray;
-    if (event.target.checked) {
-      fa.push(new FormControl(event.target.value));
+  onChkChange(event: Event): void {
+    const fa = this.profileForm.get('chk') as UntypedFormArray;
+    const target = event.target as HTMLInputElement | null;
+    if (!target) return;
+
+    if (target.checked) {
+      fa.push(new FormControl<string>(target.value));
     } else {
       let idx = 0;
-      fa.controls.forEach((ctrl: FormControl) => {
-        if (ctrl.value === event.target.value) {
+      fa.controls.forEach((ctrl: AbstractControl<string>) => {
+        if (ctrl.value === target.value) {
           fa.removeAt(idx);
           return;
         }
@@ -146,7 +151,7 @@ export class FormPublicComponent implements OnInit {
   }
 
   onFound(key: string, value: string): void {
-    this.profileForm.get(key).setValue(value);
+    this.profileForm.get(key)?.setValue(value);
   }
 
   onReset(): void {
@@ -160,16 +165,16 @@ export class FormPublicComponent implements OnInit {
     this.counter.save(window.origin, 'public');
   }
 
-  trackByFn(index, item) {
+  trackByFn(index: number, item: { id: number }) {
     return item.id;
   }
 
-  private setMobilityValidators(value): void {
+  private setMobilityValidators(value: string): void {
     if (value === 'no') {
-      this.profileForm.get('mobility_date').clearValidators();
+      this.profileForm.get('mobility_date')?.clearValidators();
     } else {
-      this.profileForm.get('mobility_date').setValidators(Validators.required);
+      this.profileForm.get('mobility_date')?.setValidators(Validators.required);
     }
-    this.profileForm.get('mobility_date').updateValueAndValidity();
+    this.profileForm.get('mobility_date')?.updateValueAndValidity();
   }
 }

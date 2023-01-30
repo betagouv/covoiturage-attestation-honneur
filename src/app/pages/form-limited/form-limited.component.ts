@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CounterService } from 'src/app/services/counter.service';
 import { AddressService } from '../../services/address.service';
@@ -13,32 +13,32 @@ import { PdfLimitedGeneratorService } from '../../services/pdfLimited.service';
 })
 export class FormLimitedComponent implements OnInit {
   // configure the form fields
-  profileForm = new FormGroup({
-    name: new FormControl(null, [
+  profileForm = new UntypedFormGroup({
+    name: new UntypedFormControl(null, [
       Validators.required,
       Validators.maxLength(128),
     ]),
-    address: new FormControl(null, [
+    address: new UntypedFormControl(null, [
       Validators.required,
       Validators.maxLength(256),
     ]),
-    employer: new FormControl(null, [
+    employer: new UntypedFormControl(null, [
       Validators.required,
       Validators.maxLength(128),
     ]),
-    workshare: new FormControl(null, [
+    workshare: new UntypedFormControl(null, [
       Validators.maxLength(3),
       Validators.pattern(/^[0-9]{0,3}$/),
     ]),
-    distance: new FormControl(null, [
+    distance: new UntypedFormControl(null, [
       Validators.max(100000),
       Validators.pattern(/^[0-9]{0,6}$/),
     ]),
-    days: new FormControl(null, [
+    days: new UntypedFormControl(null, [
       Validators.max(365),
       Validators.pattern(/^[0-9]{0,6}$/),
     ]),
-    location: new FormControl(null, [
+    location: new UntypedFormControl(null, [
       Validators.required,
       Validators.maxLength(128),
     ]),
@@ -72,13 +72,13 @@ export class FormLimitedComponent implements OnInit {
 
   showError(fieldName: string, errorName: string) {
     return (
-      this.profileForm.get(fieldName).dirty &&
-      this.profileForm.get(fieldName).hasError(errorName)
+      this.profileForm.get(fieldName)?.dirty &&
+      this.profileForm.get(fieldName)?.hasError(errorName)
     );
   }
 
   onFound(key: string, value: string): void {
-    this.profileForm.get(key).setValue(value);
+    this.profileForm.get(key)?.setValue(value);
   }
 
   onReset(): void {
