@@ -1,25 +1,27 @@
-# Générateur d'attestation sur l'honneur de covoiturage
+# Attestation
 
-Le Forfait mobilités durables permet aux employeurs du secteur privé de prendre en charge de manière facultative (jusqu'à 500 € par an par salarié exonérés de charges sociales et fiscales) les frais de déplacement de leurs salariés sur leur trajet domicile-travail effectué avec des modes alternatifs à la voiture individuelle, notamment en covoiturage.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
 
-Le Forfait mobilités durables dans la fonction publique permet aux agents ayant recours au moins 100 jours par an (modulé selon le temps de travail) au covoiturage et/ou au vélo pour leur trajet domicile-travail de bénéficier d’une indemnité forfaitaire de 200 € par an (exonérée d’impôts et prélèvements sociaux).
+## Development server
 
-L’employeur doit pouvoir se procurer, auprès de ses salariés et selon une périodicité au moins annuelle, une attestation sur l'honneur du salarié ou un justificatif de l’utilisation des modes de transport ouvrant droit à la prise en charge dans le cadre du « forfait mobilités durables ». Ces modalités sont définies par des accords d'entreprise.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-Si les accords entreprise de l'employeur le permettent, il est possible de communiquer une attestation sur l'honneur.
+## Code scaffolding
 
-### Fonctionnement
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-1. je complète le formulaire suivant avec les informations me concernant ;
-2. je télécharge l'attestation dûment complétée ;
-3. je communique cette attestation auprès de mon employeur.
+## Build
 
-## Contribution
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-Les contributions sont les bienvenues. Merci de [créer un ticket](/../../issues) si le sujet n'a pas déjà été abordé.
+## Running unit tests
 
-Les [_Pull Requests_](/../../pulls) documentées sont également les bienvenues.
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Licence
+## Running end-to-end tests
 
-Licence Apache 2.0 - © DINUM 2022 - [beta.gouv](https://beta.gouv.fr)
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

@@ -72,13 +72,13 @@ export class FormLimitedComponent implements OnInit {
 
   showError(fieldName: string, errorName: string) {
     return (
-      this.profileForm.get(fieldName).dirty &&
-      this.profileForm.get(fieldName).hasError(errorName)
+      this.profileForm.get(fieldName)?.dirty &&
+      this.profileForm.get(fieldName)?.hasError(errorName)
     );
   }
 
   onFound(key: string, value: string): void {
-    this.profileForm.get(key).setValue(value);
+    this.profileForm.get(key)?.setValue(value);
   }
 
   onReset(): void {

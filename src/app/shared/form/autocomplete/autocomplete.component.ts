@@ -37,7 +37,7 @@ import { AddressService } from 'src/app/services/address.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
-  @ViewChild('autocomplete', { static: true }) autocomplete: ElementRef<any>;
+  @ViewChild('autocomplete', { static: true }) autocomplete = {} as ElementRef<any>;
 
   items: Array<string> = [];
   search = new UntypedFormControl();
@@ -56,9 +56,8 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
       .pipe(
         debounceTime(250),
         distinctUntilChanged(),
-        // reset value to null if empty
         tap((v) => {
-          if (v.trim() === '') this.writeValue(null);
+          if (v.trim() === '') this.writeValue('');
         }),
 
         // filter out empty strings to avoid search nothing
@@ -81,7 +80,7 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
 
   // hide the dropdown when clicks anywhere else
   @HostListener('document:click', ['$event.target'])
-  public onClick(targetElement) {
+  public onClick(targetElement: EventTarget) {
     const clickedInside = this.autocomplete.nativeElement.contains(
       targetElement
     );

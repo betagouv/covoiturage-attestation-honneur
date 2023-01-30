@@ -5,6 +5,7 @@ import {
   Validators,
   UntypedFormArray,
   AbstractControl,
+  FormControl,
 } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CounterService } from '../../services/counter.service';
@@ -54,7 +55,7 @@ export class FormPublicComponent implements OnInit {
       [
         Validators.required,
         // validate array length
-        (c: AbstractControl): { [key: string]: any } =>
+        (c: AbstractControl<string[]>): { [key: string]: any } | null =>
           c.value.filter((i) => !!i && i !== '').length === 11
             ? null
             : { arrayLength: true },
@@ -71,7 +72,7 @@ export class FormPublicComponent implements OnInit {
     protected companyService: CompanyService,
     private pdf: PdfPublicGeneratorService,
     private counter: CounterService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // reload saved data in a crash free way
@@ -114,29 +115,30 @@ export class FormPublicComponent implements OnInit {
       });
 
     // set mobility_date required stated
-    this.profileForm
-      .get('mobility')
-      .valueChanges.subscribe((value) => this.setMobilityValidators(value));
+    this.profileForm.get('mobility')?.valueChanges.subscribe((value) => this.setMobilityValidators(value));
 
     // init validators for existing value
-    this.setMobilityValidators(this.profileForm.get('mobility').value);
+    this.setMobilityValidators(this.profileForm.get('mobility')?.value);
   }
 
   showError(fieldName: string, errorName: string) {
     return (
-      this.profileForm.get(fieldName).dirty &&
-      this.profileForm.get(fieldName).hasError(errorName)
+      this.profileForm.get(fieldName)?.dirty &&
+      this.profileForm.get(fieldName)?.hasError(errorName)
     );
   }
 
-  onChkChange(event): void {
+  onChkChange(event: Event): void {
     const fa = this.profileForm.get('chk') as UntypedFormArray;
-    if (event.target.checked) {
-      fa.push(new UntypedFormControl(event.target.value));
+    const target = event.target as HTMLInputElement | null;
+    if (!target) return;
+
+    if (target.checked) {
+      fa.push(new FormControl<string>(target.value));
     } else {
       let idx = 0;
-      fa.controls.forEach((ctrl: UntypedFormControl) => {
-        if (ctrl.value === event.target.value) {
+      fa.controls.forEach((ctrl: AbstractControl<string>) => {
+        if (ctrl.value === target.value) {
           fa.removeAt(idx);
           return;
         }
@@ -146,7 +148,7 @@ export class FormPublicComponent implements OnInit {
   }
 
   onFound(key: string, value: string): void {
-    this.profileForm.get(key).setValue(value);
+    this.profileForm.get(key)?.setValue(value);
   }
 
   onReset(): void {
@@ -160,16 +162,16 @@ export class FormPublicComponent implements OnInit {
     this.counter.save(window.origin, 'public');
   }
 
-  trackByFn(index, item) {
+  trackByFn(index: number, item: { id: number }) {
     return item.id;
   }
 
-  private setMobilityValidators(value): void {
+  private setMobilityValidators(value: string): void {
     if (value === 'no') {
-      this.profileForm.get('mobility_date').clearValidators();
+      this.profileForm.get('mobility_date')?.clearValidators();
     } else {
-      this.profileForm.get('mobility_date').setValidators(Validators.required);
+      this.profileForm.get('mobility_date')?.setValidators(Validators.required);
     }
-    this.profileForm.get('mobility_date').updateValueAndValidity();
+    this.profileForm.get('mobility_date')?.updateValueAndValidity();
   }
 }

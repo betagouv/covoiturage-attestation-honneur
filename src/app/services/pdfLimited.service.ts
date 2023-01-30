@@ -1,6 +1,6 @@
 import { saveAs } from 'file-saver';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-import { from, ObservableInput } from 'rxjs';
+import { from, ObservableInput, Observer } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -18,17 +18,19 @@ export class PdfLimitedGeneratorService {
     data: ProfileLimitedFormInterface,
     obs?: { onComplete?: Function; onError?: Function }
   ) {
-    const observer = {
-      next: (pdfBytes) => {
+    const observer: Observer<ArrayBuffer> = {
+      next: (pdfBytes: ArrayBuffer) => {
         saveAs(
           new Blob([pdfBytes], { type: 'application/pdf' }),
           certFilename(data.name)
         );
       },
+      error: () => {},
+      complete: () => {},
     };
 
-    if (obs.onError) observer['error'] = obs.onError;
-    if (obs.onComplete) observer['complete'] = obs.onComplete;
+    if (obs?.onError) observer['error'] = obs.onError as (err: any) => void;
+    if (obs?.onComplete) observer['complete'] = obs.onComplete  as () => void;
 
     this.http
       .get('/assets/certificate_ltd.pdf', { responseType: 'arraybuffer' })
@@ -45,7 +47,7 @@ export class PdfLimitedGeneratorService {
         switchMap(async (doc: PDFDocument) => {
           const font = await doc.embedFont(StandardFonts.HelveticaBold);
           const page = doc.getPage(0);
-          const draw = ((p, f) => (text, x, y) => {
+          const draw = ((p, f) => (text: string, x: number, y: number) => {
             p.drawText(text, {
               x,
               y,
@@ -124,7 +126,7 @@ export class PdfLimitedGeneratorService {
       .subscribe(observer);
   }
 
-  private handleError(err): ObservableInput<any> {
+  private handleError(err: any): ObservableInput<any> {
     console.log(err);
     return err;
   }

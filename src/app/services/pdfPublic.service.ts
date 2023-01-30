@@ -1,6 +1,6 @@
 import { saveAs } from 'file-saver';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-import { from, ObservableInput } from 'rxjs';
+import { from, ObservableInput, Observer } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -12,23 +12,25 @@ import { format } from '../shared/helpers/date.helper';
   providedIn: 'root',
 })
 export class PdfPublicGeneratorService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   generate(
     data: ProfilePublicFormInterface,
     obs?: { onComplete?: Function; onError?: Function }
   ) {
-    const observer = {
-      next: (pdfBytes) => {
+    const observer: Observer<ArrayBuffer> = {
+      next: (pdfBytes: ArrayBuffer) => {
         saveAs(
           new Blob([pdfBytes], { type: 'application/pdf' }),
           certFilename(data.name)
         );
       },
+      error: () => {},
+      complete: () => {},
     };
 
-    if (obs.onError) observer['error'] = obs.onError;
-    if (obs.onComplete) observer['complete'] = obs.onComplete;
+    if (obs?.onError) observer['error'] = obs.onError as (err: any) => void;
+    if (obs?.onComplete) observer['complete'] = obs.onComplete as () => void;
 
     this.http
       .get('/assets/certificate_public.pdf', { responseType: 'arraybuffer' })
@@ -45,7 +47,7 @@ export class PdfPublicGeneratorService {
         switchMap(async (doc: PDFDocument) => {
           const font = await doc.embedFont(StandardFonts.HelveticaBold);
           const page = doc.getPage(0);
-          const draw = ((p, f) => (text, x, y, size = 11) => {
+          const draw = ((p, f) => (text: string, x: number, y: number, size = 11) => {
             p.drawText(text, {
               x,
               y,
@@ -62,7 +64,7 @@ export class PdfPublicGeneratorService {
 
           const now = new Date();
           draw(
-            `${format(now.getDate())}/${format(now.getMonth()+1)}/${now.getFullYear()}`,
+            `${format(now.getDate())}/${format(now.getMonth() + 1)}/${now.getFullYear()}`,
             380,
             180
           );
@@ -129,7 +131,7 @@ export class PdfPublicGeneratorService {
       .subscribe(observer);
   }
 
-  private handleError(err): ObservableInput<any> {
+  private handleError(err: any): ObservableInput<any> {
     console.log(err);
     return err;
   }
