@@ -19,6 +19,9 @@ import { PdfPublicGeneratorService } from '../../services/pdfPublic.service';
   styleUrls: ['./form-public.component.scss'],
 })
 export class FormPublicComponent implements OnInit {
+  // Nuber 
+  private readonly CHECKBOXES_COUNT = 9;
+
   // configure the form fields
   currentYear: number = new Date().getFullYear();
   previousYear: number = new Date().getFullYear() - 1;
@@ -56,7 +59,7 @@ export class FormPublicComponent implements OnInit {
         Validators.required,
         // validate array length
         (c: AbstractControl<string[]>): { [key: string]: any } | null =>
-          c.value.filter((i) => !!i && i !== '').length === 11
+          c.value.filter((i) => !!i && i !== '').length === this.CHECKBOXES_COUNT
             ? null
             : { arrayLength: true },
       ]

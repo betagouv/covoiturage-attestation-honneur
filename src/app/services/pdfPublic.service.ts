@@ -25,8 +25,8 @@ export class PdfPublicGeneratorService {
           certFilename(data.name)
         );
       },
-      error: () => {},
-      complete: () => {},
+      error: () => { },
+      complete: () => { },
     };
 
     if (obs?.onError) observer['error'] = obs.onError as (err: any) => void;
@@ -58,15 +58,15 @@ export class PdfPublicGeneratorService {
           })(page, font);
 
           draw(data.name, 420, 494);
-          draw(data.days.toString(), 457, 298);
-          draw(data.year.toString(), 568, 298);
-          draw(data.location, 380, 193);
+          draw(data.days.toString(), 457, 350);
+          draw(data.year.toString(), 568, 350);
+          draw(data.location, 380, 245);
 
           const now = new Date();
           draw(
             `${format(now.getDate())}/${format(now.getMonth() + 1)}/${now.getFullYear()}`,
             380,
-            180
+            232
           );
 
           draw(data.name, 79, 482, 10);

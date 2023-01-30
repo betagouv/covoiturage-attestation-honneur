@@ -3,6 +3,17 @@
 <form [formGroup]="profileForm" (submit)="onSubmit()" (reset)="onReset()">
   <h4>Secteur public</h4>
 
+  <p>
+    L’indemnité est un montant forfaitaire pouvant aller jusqu’à 300&nbsp;€ par an 
+    (exonérée d’impôts et de prélèvements sociaux) en fonction du nombre de déplacements réalisés :
+  </p>
+
+  <ul>
+    <li>100 € pour un nombre de déplacements entre 30 et 59 jours ;</li>
+    <li>200 € pour un nombre de déplacements entre 60 et 99 jours ;</li>
+    <li>300 € pour un nombre de déplacements d’au moins 100 jours </li>
+  </ul>
+
   <p class="rf-highlight">
     Les champs suivis d'un
     <span class="rf-label--required"></span> sont obligatoires.
@@ -198,7 +209,7 @@
   <!-- Checkbox nightmare -->
   <div class="rf-checkbox-group">
     <legend class="rf-fieldset__legend">Je certifie que...</legend>
-    <input
+    <!-- <input
       type="checkbox"
       id="checkbox_1"
       name="checkbox_1"
@@ -207,9 +218,9 @@
     />
     <label class="rf-label" for="checkbox_1">
       Je ne bénéficie pas d’abonnement de transport public de personne&nbsp;;
-    </label>
+    </label> -->
 
-    <input
+    <!-- <input
       type="checkbox"
       id="checkbox_2"
       name="checkbox_2"
@@ -219,9 +230,9 @@
     <label class="rf-label" for="checkbox_2">
       Je ne bénéficie pas d’un abonnement de service public de location de
       vélo&nbsp;;
-    </label>
+    </label> -->
 
-    <input
+    <!-- <input
       type="checkbox"
       id="checkbox_3"
       name="checkbox_3"
@@ -231,7 +242,7 @@
     <label class="rf-label" for="checkbox_3">
       Je ne perçois pas d’indemnités représentatives de frais pour mes
       déplacements entre ma résidence habituelle et mon lieu de travail&nbsp;;
-    </label>
+    </label> -->
 
     <input
       type="checkbox"
