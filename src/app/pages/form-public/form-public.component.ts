@@ -20,7 +20,7 @@ import { PdfPublicGeneratorService } from '../../services/pdfPublic.service';
 })
 export class FormPublicComponent implements OnInit {
   // Nuber 
-  private readonly CHECKBOXES_COUNT = 9;
+  private readonly CHECKBOXES_COUNT = 8;
 
   // configure the form fields
   currentYear: number = new Date().getFullYear();
