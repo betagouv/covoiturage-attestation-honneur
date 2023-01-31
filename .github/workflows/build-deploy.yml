@@ -12,7 +12,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           npm install
-          npm run build:production
+          npm run build
 
       - name: Install SSH Client 🔑
         uses: webfactory/ssh-agent@v0.4.1

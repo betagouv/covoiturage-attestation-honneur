@@ -2,7 +2,7 @@
   "name": "attestation",
   "version": "1.0.0",
   "engines": {
-    "node": "16.13"
+    "node": "16"
   },
   "scripts": {
     "ng": "ng",
